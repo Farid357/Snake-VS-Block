@@ -1,0 +1,43 @@
+﻿[*.cs]
+
+# IDE0055: Исправить форматирование
+dotnet_diagnostic.IDE0055.severity = none
+csharp_style_expression_bodied_methods=when_on_single_line:silent
+csharp_style_expression_bodied_constructors=when_on_single_line:silent
+csharp_style_var_when_type_is_apparent=true:silent
+dotnet_diagnostic.SA1301.severity=error
+dotnet_diagnostic.SA1309.severity=silent
+dotnet_diagnostic.SA1206.severity=silent
+dotnet_diagnostic.SA1202.severity=silent
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1101: Prefix local calls with this
+dotnet_diagnostic.SA1101.severity = none
+
+# IDE0011: Добавить фигурные скобки
+dotnet_diagnostic.IDE0011.severity = none
+
+# SA1503: Braces should not be omitted
+dotnet_diagnostic.SA1503.severity = none
+
+# SA1200: Using directives should be placed correctly
+dotnet_diagnostic.SA1200.severity = none
+
+# SA1000: Keywords should be spaced correctly
+dotnet_diagnostic.SA1000.severity = none
+
+# SA1133: Do not combine attributes
+dotnet_diagnostic.SA1133.severity = none
+
+# SA1134: Attributes should not share line
+dotnet_diagnostic.SA1134.severity = none
+
+# SA1633: File should have header
+dotnet_diagnostic.SA1633.severity = none
+dotnet_diagnostic.SA1119_p.severity=suggestion
+
+[*.{cs,vb}]
+dotnet_style_prefer_is_null_check_over_reference_equality_method=true:warning
+dotnet_style_null_propagation=true:warning

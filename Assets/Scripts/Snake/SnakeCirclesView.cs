@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Snake.GameLogic
 {
     public sealed class SnakeCirclesView : MonoBehaviour
     {
+        [SerializeField] private TMP_Text _text;
         private List<Transform> _circles = new();
         private List<Vector3> _positions = new();
         private SnakeHead _head;
@@ -19,19 +21,14 @@ namespace Snake.GameLogic
 
         private void Update()
         {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.D))
-            {
-                RemovOne();
-            }
-
             float distance = 0;
             if (_head != null)
               distance = (_head.transform.position - _positions[0]).magnitude;
 
             if (distance > _circleDiameter)
             {
-                Vector3 direction = (_head.transform.position - _positions[0]).normalized;
-                _positions.Insert(0, _positions[0] + direction * _circleDiameter);
+                var direction = (_head.transform.position - _positions[0]).normalized;
+                _positions.Insert(0, _positions[0] + (direction * _circleDiameter));
                 _positions.RemoveAt(_positions.Count - 1);
                 distance -= _circleDiameter;
             }
@@ -51,17 +48,21 @@ namespace Snake.GameLogic
                 var circle = Instantiate(_head.transform, lastCirclePosition, Quaternion.identity);
                 _circles.Add(circle);
                 _positions.Add(circle.position);
+                
             }
         }
 
-        public void RemovOne()
+        public void UpdateText(int count) => _text.text = count.ToString();
+
+        public void RemoveLast()
         {
             if (_circles.Count - 1 < 0)
             {
                 Destroy(_head.gameObject);
                 return;
             }
-            Destroy(_circles[_circles.Count - 1].gameObject);
+
+            Destroy(_circles[^1].gameObject);
             _circles.RemoveAt(_circles.Count - 1);
             _positions.RemoveAt(_positions.Count - 1);
         }

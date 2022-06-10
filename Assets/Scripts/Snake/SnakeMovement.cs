@@ -1,6 +1,6 @@
-using UnityEngine;
 using Snake.Input;
 using Snake.Tools;
+using UnityEngine;
 
 namespace Snake.Model
 {
@@ -10,10 +10,10 @@ namespace Snake.Model
         private readonly float _verticalSpeed = 1.2f;
         private readonly Rigidbody2D _rigidbody;
         private readonly IInput _input;
-        private readonly HorizontalBounds _bounds;
+        private readonly Tools.SafeAreaBounds _bounds;
         private float _xDelta;
 
-        public SnakeMovement(IInput input, Rigidbody2D rigidbody, float horizontalSpeed, HorizontalBounds bounds)
+        public SnakeMovement(IInput input, Rigidbody2D rigidbody, float horizontalSpeed, Tools.SafeAreaBounds bounds)
         {
             _rigidbody = rigidbody ?? throw new System.ArgumentNullException(nameof(rigidbody));
             _horizontalSpeed = horizontalSpeed;
@@ -26,8 +26,8 @@ namespace Snake.Model
 
         public void FixedUpdate(float fixedDeltaTime)
         {
-            Vector2 movement = Vector2.right * (_xDelta * _horizontalSpeed) + Vector2.up * _verticalSpeed;
-            Vector2 movePosition = _rigidbody.position + movement * fixedDeltaTime;
+            Vector2 movement = (Vector2.right * (_xDelta * _horizontalSpeed)) + (Vector2.up * _verticalSpeed);
+            Vector2 movePosition = _rigidbody.position + (movement * fixedDeltaTime);
 
             movePosition = movePosition.ClampForBounds(_bounds);
             _rigidbody.MovePosition(movePosition);

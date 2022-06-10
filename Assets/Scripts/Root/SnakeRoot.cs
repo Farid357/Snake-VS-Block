@@ -1,8 +1,9 @@
+using Snake.GameLogic;
 using Snake.Input;
-using UnityEngine;
 using Snake.Model;
 using Snake.Tools;
-using Snake.GameLogic;
+using UnityEngine;
+using Zenject;
 
 namespace Snake.Root
 {
@@ -15,20 +16,22 @@ namespace Snake.Root
         [SerializeField] private SnakeHead _snakeHead;
         [SerializeField] private Circle _prefab;
         [SerializeField, Min(1)] private int _circlesStartCount = 4;
+        [SerializeField] private BlockRoot _blockRoot;
         private Camera _camera;
         private SnakeMovement _snake;
         private IDisposable _presenter;
+        private SnakeCircles _model;
 
         private void Awake()
         {
             _camera = Camera.main;
-            SnakeCircles model = new();
-            var bounds = new HorizontalBounds(_camera);
+            var bounds = new SafeAreaBounds(_camera);
             _prefab.SetColliderFromGameObject();
             _snake = new SnakeMovement(_input, _snakeRigidbody, _horizontalSpeed, bounds);
             _input.Init(_camera);
             _view.Init(_snakeHead, _prefab);
-            _presenter = new SnakeCirclesPresenter(_view, model, _circlesStartCount);
+            _presenter = new SnakeCirclesPresenter(_view, _model, _circlesStartCount);
+            _blockRoot.Init(bounds);
         }
 
         private void FixedUpdate()
@@ -41,6 +44,9 @@ namespace Snake.Root
             _snake.Dispose();
             _presenter.Dispose();
         }
+
+        [Inject]
+        private void Constructor(SnakeCircles model) => _model = model;
     }
 }
 
@@ -52,4 +58,9 @@ public interface IFixedUpdatable
 public interface IDisposable
 {
     public void Dispose();
+}
+
+public interface IUpdatable
+{
+    public void Update(float deltaTime);
 }

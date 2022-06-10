@@ -4,11 +4,9 @@ namespace Snake.Tools
 {
     public static class Vector2Extension
     {
-        private const float ScreenDelta = 0.6f;
-
-        public static Vector2 ClampForBounds(this Vector2 position, in HorizontalBounds bounds)
+        public static Vector2 ClampForBounds(this Vector2 position, in SafeAreaBounds bounds)
         {
-            var minPositionWithDelta = bounds.MinPositionX + ScreenDelta;
+            var minPositionWithDelta = bounds.GetMinPositionXWithOffset();
             if (position.x > bounds.MaxPositionX)
             {
                 position.x = bounds.MaxPositionX;
