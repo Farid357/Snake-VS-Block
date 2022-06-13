@@ -16,8 +16,11 @@ namespace Snake.GameLogic
 
         public async void Enable()
         {
-            await Task.Delay(System.TimeSpan.FromSeconds(_lifeTime));
-            _blockView.Disable();
+            if (_blockView != null)
+            {
+                await Task.Delay(System.TimeSpan.FromSeconds(_lifeTime));
+                _blockView.Disable();
+            }
         }
     }
 }

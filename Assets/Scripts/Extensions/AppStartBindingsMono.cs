@@ -5,7 +5,7 @@ using Snake.Tools;
 
 namespace Snake.GameLogic
 {
-    public class AppStartBindings : MonoInstaller
+    public sealed class AppStartBindingsMono : MonoInstaller
     {
         public override void InstallBindings()
         {

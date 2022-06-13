@@ -11,12 +11,10 @@ namespace Snake.GameLogic
         private readonly IEnumerable<float> _chances;
         private IBlock[] _blocks;
         private readonly SnakeCircles _snakeCircles;
-        private readonly int _snakeCirclesCount;
         private float _seconds = 5.5f;
 
-        public RandomBlockGenerator(IEnumerable<BlockContext> contexts, int snakeCirclesCount, SnakeCircles snakeCircles)
+        public RandomBlockGenerator(IEnumerable<BlockContext> contexts, SnakeCircles snakeCircles)
         {
-            _snakeCirclesCount = snakeCirclesCount;
             _contexts = contexts ?? throw new System.ArgumentNullException(nameof(contexts));
             _snakeCircles = snakeCircles;
             _chances = CreateChances();
@@ -48,16 +46,18 @@ namespace Snake.GameLogic
 
                 if (dropChance <= value)
                 {
+                    Debug.Log(_blocks[i].GetType());
                     return _blocks[i];
                 }
             }
+            Debug.Log("log");
             var last = _blocks.Length - 1;
             return _blocks[last];
         }
 
         private float GetChance(BlockContext context)
         {
-            return context.ChanceCurve.Evaluate(_snakeCirclesCount);
+            return context.ChanceCurve.Evaluate(_snakeCircles.Count);
         }
     }
 }

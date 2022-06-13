@@ -20,6 +20,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2121920029082518869, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
+      propertyPath: _particle
+      value: 
+      objectReference: {fileID: 7343586068617278841, guid: 5cbcaf84bd4b7754390faa5127b01def, type: 3}
+    - target: {fileID: 2121920029082518869, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
       propertyPath: _colors.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -109,7 +113,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3570641484551903443, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447752723553593928, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
+      propertyPath: <Diameter>k__BackingField
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 6447752723553593928, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
       propertyPath: <ChanceCurve>k__BackingField.m_Curve.Array.size

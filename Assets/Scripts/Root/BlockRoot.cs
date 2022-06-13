@@ -6,20 +6,28 @@ using UnityEngine;
 
 namespace Snake.Root
 {
-    public sealed class BlockRoot : MonoBehaviour
+    public sealed class BlockRoot : MonoBehaviour, IDisposableDestroyer
     {
         [SerializeField] private BlockFactory _factory;
         [SerializeField] private int _startSpawnCount = 8;
-        [SerializeField] private FoodView _prefab;
-        [SerializeField] private int _foodStartCount = 6;
-        private IDisposable _foodFactory;
+        [SerializeField] private BlockContext _context;
+        private List<IDisposable> _disposables;
 
         public void Init(SafeAreaBounds bounds, SnakeCircles snakeCircles)
         {
-            _factory.Init(bounds, _startSpawnCount);
-            _foodFactory = new FoodFactory(_factory, snakeCircles, _prefab, _foodStartCount);
+            _factory.Init(bounds, _context.Diameter);
+            _factory.Enable(_startSpawnCount);
         }
 
-        private void OnDisable() => _foodFactory.Dispose();
+        public void SetDisposables(List<IDisposable> disposables) => _disposables = disposables;
+
+        private void OnDestroy()
+        {
+            _disposables.ForEach(d => d.Dispose());
+        }
+    }
+    public interface IDisposableDestroyer
+    {
+        public void SetDisposables(List<IDisposable> disposables);
     }
 }

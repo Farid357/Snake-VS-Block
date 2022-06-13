@@ -7,7 +7,6 @@ namespace Snake.Model
     {
         private bool _isImmortal;
 
-        public event Action OnEnded;
         public event Action OnRemoved;
         public event Action<int> OnAdded;
 

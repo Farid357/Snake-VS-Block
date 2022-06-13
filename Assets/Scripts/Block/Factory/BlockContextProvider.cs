@@ -14,12 +14,12 @@ namespace Snake.GameLogic
             {
                 return _bonusBlock;
             }
-            if (block is BlockHealth)
+
+            else if (block is BlockHealth)
             {
                 return _baseBlock;
             }
-            else
-                throw new System.InvalidOperationException($"{block} type is not contains this method! Please add this type!");
+            throw new System.InvalidOperationException($"{block} type is not contains this method! Please add this type!");
         }
     }
 }

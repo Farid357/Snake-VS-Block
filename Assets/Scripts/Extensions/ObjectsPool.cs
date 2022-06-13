@@ -10,7 +10,6 @@ namespace Snake.Tools
         private int _count;
         private DiContainer _container;
 
-
         [Inject]
         public void Init(DiContainer container) => _container = container;
 
@@ -35,7 +34,7 @@ namespace Snake.Tools
         {
             for (int i = 0; i < _objects.Count - 1; i++)
             {
-                if (!_objects[i].gameObject.activeInHierarchy && _objects[i].GetType() == prefab.GetType())
+                if (!_objects[i].gameObject.activeInHierarchy)
                 {
                     return i;
                 }

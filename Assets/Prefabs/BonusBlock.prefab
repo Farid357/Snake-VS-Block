@@ -245,6 +245,7 @@ MonoBehaviour:
   _colors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  _particle: {fileID: 7343586068617278841, guid: 5cbcaf84bd4b7754390faa5127b01def, type: 3}
 --- !u!114 &6012081974844982814
 MonoBehaviour:
   m_ObjectHideFlags: 0

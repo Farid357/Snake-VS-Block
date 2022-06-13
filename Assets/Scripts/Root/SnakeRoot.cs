@@ -3,7 +3,6 @@ using Snake.Input;
 using Snake.Model;
 using Snake.Tools;
 using UnityEngine;
-using Zenject;
 
 namespace Snake.Root
 {
@@ -16,17 +15,20 @@ namespace Snake.Root
         [SerializeField] private SnakeHead _snakeHead;
         [SerializeField] private Circle _prefab;
         [SerializeField, Min(1)] private int _circlesStartCount = 4;
-        [SerializeField] private BlockRoot _blockRoot;
         [SerializeField] private EndGameWindowView _endGameWindow;
         [SerializeField] private ExclamationPointAnimation _animation;
+        [SerializeField] private BlockRoot _blockRoot;
         private Camera _camera;
         private SnakeMovement _snake;
         private IDisposable _presenter;
         private IUpdatable _presenterUpdate;
-        private SnakeCircles _model;
+        [SerializeField] private SnakeCircles _model;
+
+        [SerializeField] public IDisposableDestroyer DisposableDestroyer => _blockRoot;
 
         private void Awake()
         {
+            Debug.Log(_model is null);
             _camera = Camera.main;
             var bounds = new SafeAreaBounds(_camera);
             _prefab.SetColliderFromGameObject();
@@ -48,7 +50,12 @@ namespace Snake.Root
 
         private void Update() => _presenterUpdate.Update(Time.deltaTime);
 
-        [Inject]
-        private void Constructor(SnakeCircles model) => _model = model;
+        public void Init(SnakeCircles model)
+        {
+            if (model == null)
+                _model = model;
+            else
+                Debug.LogWarning("Model is not null!");
+        }
     }
 }

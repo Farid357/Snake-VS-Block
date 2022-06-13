@@ -26,6 +26,8 @@ namespace Snake.Model
 
         public void FixedUpdate(float fixedDeltaTime)
         {
+            if (_rigidbody == null) return;
+
             Vector2 movement = (Vector2.right * (_xDelta * _horizontalSpeed)) + (Vector2.up * _verticalSpeed);
             Vector2 movePosition = _rigidbody.position + (movement * fixedDeltaTime);
 
