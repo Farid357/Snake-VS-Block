@@ -8,6 +8,7 @@ namespace Snake.GameLogic
 {
     public sealed class BlockFactory : MonoBehaviour
     {
+        public event System.Action<Vector2> OnSpawned;
         [SerializeField] private float _delay;
         [SerializeField] private List<BlockContext> _contexts = new();
         [SerializeField] private Transform _spawnPoint;
@@ -47,7 +48,6 @@ namespace Snake.GameLogic
                     IBlock randomBlock = generator.CreateBlock();
                     var prefabContext = _provider.Get(randomBlock);
                     var context = _pool.Get(prefabContext);
-                    Debug.Log(prefabContext.name);
                     nextPositionX += _diameter;
 
                     context.gameObject.SetActive(true);
@@ -56,11 +56,13 @@ namespace Snake.GameLogic
                     var blockLifeTime = new BlockLifeTime(15, context.View);
                     blockLifeTime.Enable();
                     _disposables.Add(presenter);
+                    OnSpawned?.Invoke(_spawnPoint.position);
                 }
                 _spawnPoint.position = new Vector2(_startPositionX, _spawnPoint.position.y);
                 yield return wait;
             }
         }
+
         [Zenject.Inject]
         public void Init(SnakeCircles snakeCircles) => _snakeCircles = snakeCircles;
 

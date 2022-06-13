@@ -10,18 +10,21 @@ namespace Snake.Tools
         private int _count;
         private DiContainer _container;
 
+
         [Inject]
         public void Init(DiContainer container) => _container = container;
 
         public void Add(int count, T prefab, Transform parent = null)
         {
             if (!_objects.Contains(prefab))
-            {    
+            {
                 _count = count;
                 for (int i = 0; i < count; i++)
                 {
-                    //var createObject = _container.InstantiatePrefab(prefab, parent);
-                    var createObject = Object.Instantiate(prefab, parent);
+                    if (_container == null) Debug.Log("null");
+                    var createObject = parent != null ? _container.InstantiatePrefab(prefab) : _container.InstantiatePrefab(prefab, parent);
+
+                    //var createObject = Object.Instantiate(prefab, parent);
                     createObject.gameObject.SetActive(false);
                     _objects.Add(createObject.GetComponent<T>());
                 }

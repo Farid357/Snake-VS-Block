@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Snake.Model
 {
@@ -26,7 +27,6 @@ namespace Snake.Model
                 Count -= count;
                 if (Count == 0)
                 {
-                    OnEnded.Invoke();
                     return;
                 }
 
@@ -34,10 +34,11 @@ namespace Snake.Model
             }
         }
 
-        public void MakeImmortal()
+        public async void MakeImmortalForSeconds(float seconds)
         {
-            if (_isImmortal) throw new InvalidOperationException("You cant make immortal now, because it's already!");
             _isImmortal = true;
+            await Task.Delay(TimeSpan.FromSeconds(seconds));
+            _isImmortal = false;
         }
     }
 }

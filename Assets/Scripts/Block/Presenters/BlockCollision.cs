@@ -8,9 +8,9 @@ namespace Snake.GameLogic
     {
         public event Action OnCollided;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
-            if (collision.collider.TryGetComponent(out SnakeCollision snake))
+            if (collision.collider.TryGetComponent(out SnakeHead snake))
             {
                 OnCollided?.Invoke();
             }

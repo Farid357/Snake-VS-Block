@@ -14,7 +14,7 @@ namespace Snake.GameLogic
         public BlockPresenter(SnakeCircles snakeCircles, IBlock model, BlockContext context)
         {
             _snakeCircles = snakeCircles ?? throw new ArgumentNullException(nameof(snakeCircles));
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             _view = context.View ?? throw new ArgumentNullException(nameof(context.View));
             _model = model ?? throw new ArgumentNullException(nameof(model));
             _model.OnChanged += _view.Display;

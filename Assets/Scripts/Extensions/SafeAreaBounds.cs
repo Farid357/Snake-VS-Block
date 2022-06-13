@@ -7,18 +7,19 @@ namespace Snake.Tools
         private const float ScreenOffsetX = 0.6f;
 
         private readonly Camera _camera;
-        public float MinPositionX { get; private set; }
+        private float _minPositionX;
+        private float _maxPositionX;
 
         public SafeAreaBounds(Camera camera)
         {
             _camera = camera;
-            MaxPositionX = _camera.ScreenToWorldPoint(Screen.safeArea.max).x;
-            MinPositionX = _camera.ScreenToWorldPoint(Screen.safeArea.min).x;
+            _maxPositionX = _camera.ScreenToWorldPoint(Screen.safeArea.max).x;
+            _minPositionX = _camera.ScreenToWorldPoint(Screen.safeArea.min).x;
         }
 
-        public float MaxPositionX { get; private set; }
+        public float GetMaxPositionX() => _maxPositionX - ScreenOffsetX;
 
-        public float GetMinPositionXWithOffset() => MinPositionX + ScreenOffsetX;
+        public float GetMinPositionXWithOffset() => _minPositionX + ScreenOffsetX;
 
     }
 }

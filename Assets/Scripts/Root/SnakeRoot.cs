@@ -17,9 +17,12 @@ namespace Snake.Root
         [SerializeField] private Circle _prefab;
         [SerializeField, Min(1)] private int _circlesStartCount = 4;
         [SerializeField] private BlockRoot _blockRoot;
+        [SerializeField] private EndGameWindowView _endGameWindow;
+        [SerializeField] private ExclamationPointAnimation _animation;
         private Camera _camera;
         private SnakeMovement _snake;
         private IDisposable _presenter;
+        private IUpdatable _presenterUpdate;
         private SnakeCircles _model;
 
         private void Awake()
@@ -29,15 +32,13 @@ namespace Snake.Root
             _prefab.SetColliderFromGameObject();
             _snake = new SnakeMovement(_input, _snakeRigidbody, _horizontalSpeed, bounds);
             _input.Init(_camera);
-            _view.Init(_snakeHead, _prefab);
+            _view.Init(_snakeHead, _prefab, _endGameWindow, _animation);
             _presenter = new SnakeCirclesPresenter(_view, _model, _circlesStartCount);
-            _blockRoot.Init(bounds);
+            _presenterUpdate = _presenter as IUpdatable;
+            _blockRoot.Init(bounds, _model);
         }
 
-        private void FixedUpdate()
-        {
-            _snake.FixedUpdate(Time.fixedDeltaTime);
-        }
+        private void FixedUpdate() => _snake.FixedUpdate(Time.fixedDeltaTime);
 
         private void OnDestroy()
         {
@@ -45,22 +46,9 @@ namespace Snake.Root
             _presenter.Dispose();
         }
 
+        private void Update() => _presenterUpdate.Update(Time.deltaTime);
+
         [Inject]
         private void Constructor(SnakeCircles model) => _model = model;
     }
-}
-
-public interface IFixedUpdatable
-{
-    public void FixedUpdate(float fixedDeltaTime);
-}
-
-public interface IDisposable
-{
-    public void Dispose();
-}
-
-public interface IUpdatable
-{
-    public void Update(float deltaTime);
 }

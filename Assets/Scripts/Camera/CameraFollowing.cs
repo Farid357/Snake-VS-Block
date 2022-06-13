@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Snake.Tools
@@ -11,7 +12,15 @@ namespace Snake.Tools
 
         private void Follow()
         {
-            transform.position = new Vector3(transform.position.x, _snake.position.y, transform.position.z);
+            try
+            {
+                transform.position = new Vector3(transform.position.x, _snake.position.y, transform.position.z);
+            }
+
+            catch(Exception)
+            {
+
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Snake.GameLogic
         private IBlock[] _blocks;
         private readonly SnakeCircles _snakeCircles;
         private readonly int _snakeCirclesCount;
+        private float _seconds = 5.5f;
 
         public RandomBlockGenerator(IEnumerable<BlockContext> contexts, int snakeCirclesCount, SnakeCircles snakeCircles)
         {
@@ -34,8 +35,8 @@ namespace Snake.GameLogic
         {
             _blocks = new IBlock[]
             {
-             new BlockHealth(Random.Range(3, 20)),
-             new BonusBlock(new SnakeImmortalAbility(_snakeCircles), Random.Range(3, 20))
+             new BlockHealth(Random.Range(1, 5)),
+             new BonusBlock(new SnakeImmortalAbility(_snakeCircles, _seconds), Random.Range(1, 5))
             };
             var sum = _chances.Sum();
             var dropChance = Random.Range(0, sum);
@@ -45,7 +46,7 @@ namespace Snake.GameLogic
             {
                 value += _chances.ElementAt(i);
 
-                if (_chances.ElementAt(i) <= dropChance)
+                if (dropChance <= value)
                 {
                     return _blocks[i];
                 }

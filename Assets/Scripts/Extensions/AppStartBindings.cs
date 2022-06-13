@@ -1,6 +1,7 @@
 using Zenject;
 using Snake.Model;
 using UnityEngine;
+using Snake.Tools;
 
 namespace Snake.GameLogic
 {
@@ -8,6 +9,8 @@ namespace Snake.GameLogic
     {
         public override void InstallBindings()
         {
+            Container.Bind<ObjectsPool<BlockContext>>().FromNew().AsSingle();
+            Container.Bind<ObjectsPool<FoodView>>().FromNew().AsSingle();
             Container.Bind<SnakeCircles>().FromNew().AsSingle();
         }
     }
