@@ -21,6 +21,5 @@ namespace Snake.GameLogic
         public void Dispose() => _view.OnCollided -= Add;
 
         private void Add() => _snakeCircles.Add(_model.Count);
-
     }
 }

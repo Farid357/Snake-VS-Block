@@ -9,9 +9,9 @@ namespace Snake.GameLogic
     {
         private readonly IEnumerable<MapPair> _pairs;
         private readonly IEnumerable<float> _chances;
-        private readonly SnakeCircles _snakeCircles;
+        private readonly ICounter _snakeCircles;
 
-        public RandomMapPairGenerator(IEnumerable<MapPair> pairs, SnakeCircles snakeCircles)
+        public RandomMapPairGenerator(IEnumerable<MapPair> pairs, ICounter snakeCircles)
         {
             _snakeCircles = snakeCircles ?? throw new System.ArgumentNullException(nameof(snakeCircles));
             _pairs = pairs ?? throw new System.ArgumentNullException(nameof(pairs));

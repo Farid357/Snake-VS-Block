@@ -1,7 +1,6 @@
 ﻿using Snake.Tools;
 using Snake.Model;
 using UnityEngine;
-using Zenject;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -18,7 +17,7 @@ namespace Snake.GameLogic
         private ObjectsPool<MapPair> _pool;
         private SnakeCircles _snakeCircles;
 
-        [Inject]
+        [Zenject.Inject]
         public void Constructor(ObjectsPool<MapPair> pool) => _pool = pool;
 
         public void Init(int startCount, Transform parent, SnakeCircles snakeCircles)
@@ -26,7 +25,7 @@ namespace Snake.GameLogic
             _provider = new(snakeCircles);
             _generator = new(_pairs, snakeCircles);
             _snakeCircles = snakeCircles ?? throw new System.ArgumentNullException(nameof(snakeCircles));
-      
+
             for (int i = 0; i < _pairs.Count; i++)
             {
                 _pool.Add(startCount, _pairs[i], parent);
@@ -47,11 +46,20 @@ namespace Snake.GameLogic
                 pair.transform.position = new Vector2(pair.transform.position.x, _spawnPoint.position.y);
                 pair.Enable();
 
-                foreach (var context in pair.Contexts)
+                foreach (var block in pair.BlockContexts)
                 {
-                    var block = _provider.GetBlock(context.Type, context.Health, context.AbilitySeconds);
-                    IDisposable presenter = new BlockPresenter(_snakeCircles, block, context.View, context.Collision);
+                    var model = _provider.GetBlock(block.Type, block.Health, block.AbilitySeconds);
+                    IDisposable presenter = new BlockPresenter(_snakeCircles, model, block.View, block.Collision);
                     _disposables.Add(presenter);
+                    block.gameObject.SetActive(true);
+                }
+
+                foreach (var food in pair.FoodContexts)
+                {
+                    var model = new Food(food.Value);
+                    IDisposable presenter = new FoodPresener(model, food.View, _snakeCircles);
+                    _disposables.Add(presenter);
+                    food.gameObject.SetActive(true);
                 }
 
                 yield return wait;

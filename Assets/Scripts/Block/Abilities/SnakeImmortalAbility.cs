@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEngine;
+using System.Threading.Tasks;
 
 namespace Snake.Model
 {
@@ -14,10 +14,11 @@ namespace Snake.Model
             _snakeCircles = snakeCircles ?? throw new ArgumentNullException(nameof(snakeCircles));
         }
 
-        public void Apply()
+        public async void Apply()
         {
-            Debug.Log("Immortal");
-           _snakeCircles.MakeImmortalForSeconds(_seconds);
+            _snakeCircles.SetIsImmortal(true);
+            await Task.Delay(TimeSpan.FromSeconds(_seconds));
+           _snakeCircles.SetIsImmortal(false);
         }
     }
 }

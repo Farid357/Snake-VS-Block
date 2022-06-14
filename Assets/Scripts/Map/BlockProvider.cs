@@ -10,7 +10,7 @@ namespace Snake.GameLogic
 
         public IBlock GetBlock(BlockType type, int health, float seconds)
         {
-            if (type == BlockType.WithBonus)
+            if (type == BlockType.WithAbiity)
             {
                 return new BonusBlock(new SnakeImmortalAbility(_snakeCircles, seconds), health);
             }

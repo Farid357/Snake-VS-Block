@@ -3,7 +3,6 @@ using System;
 
 namespace Snake.Model
 {
-    [Serializable]
     public class BlockHealth : IBlock
     {
         private int _health;

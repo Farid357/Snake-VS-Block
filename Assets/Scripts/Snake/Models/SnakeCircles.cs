@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Snake.Model
 {
-    [Serializable]
-    public sealed class SnakeCircles
+    public sealed class SnakeCircles : ICounter
     {
         private bool _isImmortal;
 
         public event Action OnRemoved;
         public event Action<int> OnAdded;
+        public event Action<int> OnChanged;
 
         public int Count { get; private set; }
 
@@ -17,7 +17,9 @@ namespace Snake.Model
         {
             if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
             Count += count;
-            OnAdded.Invoke(count);
+            Debug.Log(Count);
+            OnAdded?.Invoke(count);
+            OnChanged?.Invoke(Count);
         }
 
         public void Remove(int count)
@@ -25,20 +27,18 @@ namespace Snake.Model
             if (_isImmortal == false)
             {
                 Count -= count;
-                if (Count == 0)
+                if (Count <= 0)
                 {
+                    Count = 0;
                     return;
                 }
+                Debug.Log(Count);
 
                 OnRemoved?.Invoke();
+                OnChanged?.Invoke(Count);
             }
         }
 
-        public async void MakeImmortalForSeconds(float seconds)
-        {
-            _isImmortal = true;
-            await Task.Delay(TimeSpan.FromSeconds(seconds));
-            _isImmortal = false;
-        }
+        public void SetIsImmortal(bool isImmortal) => _isImmortal = isImmortal;
     }
 }
