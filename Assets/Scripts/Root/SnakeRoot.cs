@@ -22,13 +22,10 @@ namespace Snake.Root
         private SnakeMovement _snake;
         private IDisposable _presenter;
         private IUpdatable _presenterUpdate;
-        [SerializeField] private SnakeCircles _model;
-
-        [SerializeField] public IDisposableDestroyer DisposableDestroyer => _blockRoot;
+        private readonly SnakeCircles _model = new();
 
         private void Awake()
         {
-            Debug.Log(_model is null);
             _camera = Camera.main;
             var bounds = new SafeAreaBounds(_camera);
             _prefab.SetColliderFromGameObject();
@@ -37,7 +34,7 @@ namespace Snake.Root
             _view.Init(_snakeHead, _prefab, _endGameWindow, _animation);
             _presenter = new SnakeCirclesPresenter(_view, _model, _circlesStartCount);
             _presenterUpdate = _presenter as IUpdatable;
-            _blockRoot.Init(bounds, _model);
+            _blockRoot.Init(_model);
         }
 
         private void FixedUpdate() => _snake.FixedUpdate(Time.fixedDeltaTime);
@@ -50,12 +47,5 @@ namespace Snake.Root
 
         private void Update() => _presenterUpdate.Update(Time.deltaTime);
 
-        public void Init(SnakeCircles model)
-        {
-            if (model == null)
-                _model = model;
-            else
-                Debug.LogWarning("Model is not null!");
-        }
     }
 }

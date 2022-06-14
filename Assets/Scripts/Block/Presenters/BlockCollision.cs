@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Snake.GameLogic
 {
+    [Serializable]
     [RequireComponent(typeof(BoxCollider2D))]
     public sealed class BlockCollision : MonoBehaviour
     {

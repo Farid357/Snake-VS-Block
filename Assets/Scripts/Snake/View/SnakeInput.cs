@@ -7,10 +7,9 @@ namespace Snake.Input
     public sealed class SnakeInput : MonoBehaviour, IInput, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         public event Action<Vector2> OnChangedDelta;
-        public event Action<Vector2> OnChangedAbsolute;
 
         private Vector2 _delta;
-        private Vector2 _absolute;
+        private Vector2 _startTouch;
         private Camera _camera;
 
         public void Init(Camera camera)
@@ -18,22 +17,20 @@ namespace Snake.Input
             _camera = camera;
 
             _delta = Vector2.zero;
-            _absolute = Vector2.zero;
+            _startTouch = Vector2.zero;
         }
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            _absolute = _camera.ScreenToWorldPoint(eventData.position);
-            OnChangedAbsolute?.Invoke(_absolute);
+            _startTouch = _camera.ScreenToWorldPoint(eventData.position);
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)
         {
-            Vector2 lastPosition = _absolute;
-            _absolute = _camera.ScreenToWorldPoint(eventData.position);
-            _delta = _absolute - lastPosition;
+            Vector2 lastPosition = _startTouch;
+            _startTouch = _camera.ScreenToWorldPoint(eventData.position);
+            _delta = _startTouch - lastPosition;
 
-            OnChangedAbsolute?.Invoke(_absolute);
             OnChangedDelta?.Invoke(_delta);
         }
 

@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7679209248289775970, guid: f0f4c062bf3d4c344b65114fa3ab7142, type: 3}
       propertyPath: m_Name
-      value: BlockVFX
+      value: BlockVFX Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8093434598219933563, guid: f0f4c062bf3d4c344b65114fa3ab7142, type: 3}
       propertyPath: looping
@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8093434598219933563, guid: f0f4c062bf3d4c344b65114fa3ab7142, type: 3}
       propertyPath: lengthInSec
-      value: 2
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8093434598219933563, guid: f0f4c062bf3d4c344b65114fa3ab7142, type: 3}
       propertyPath: playOnAwake

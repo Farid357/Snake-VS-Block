@@ -1,33 +1,20 @@
 ﻿using Snake.GameLogic;
 using Snake.Model;
 using Snake.Tools;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Snake.Root
 {
-    public sealed class BlockRoot : MonoBehaviour, IDisposableDestroyer
+    public sealed class BlockRoot : MonoBehaviour
     {
-        [SerializeField] private BlockFactory _factory;
-        [SerializeField] private int _startSpawnCount = 8;
-        [SerializeField] private BlockContext _context;
-        private List<IDisposable> _disposables;
+        [SerializeField] private MapPairFactory _factory;
+        [SerializeField] private int _startSpawnCount = 4;
 
-        public void Init(SafeAreaBounds bounds, SnakeCircles snakeCircles)
+        public void Init(SnakeCircles snakeCircles)
         {
-            _factory.Init(bounds, _context.Diameter);
-            _factory.Enable(_startSpawnCount);
+            _factory.Init(_startSpawnCount, transform, snakeCircles);
         }
 
-        public void SetDisposables(List<IDisposable> disposables) => _disposables = disposables;
-
-        private void OnDestroy()
-        {
-            _disposables.ForEach(d => d.Dispose());
-        }
-    }
-    public interface IDisposableDestroyer
-    {
-        public void SetDisposables(List<IDisposable> disposables);
+        private void OnDestroy() => _factory.Dispose();
     }
 }

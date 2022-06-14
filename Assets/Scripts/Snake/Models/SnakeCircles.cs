@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 namespace Snake.Model
 {
+    [Serializable]
     public sealed class SnakeCircles
     {
         private bool _isImmortal;
@@ -10,7 +11,7 @@ namespace Snake.Model
         public event Action OnRemoved;
         public event Action<int> OnAdded;
 
-        public int Count { get; private set; } = 1;
+        public int Count { get; private set; }
 
         public void Add(int count)
         {
