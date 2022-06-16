@@ -10,5 +10,6 @@ namespace Snake.GameLogic
         public event Action<int> OnChanged;
 
         public event Action OnEnded;
+        public void Kill();
     }
 }

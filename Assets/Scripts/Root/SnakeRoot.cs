@@ -18,6 +18,7 @@ namespace Snake.Root
         [SerializeField] private EndGameWindowView _endGameWindow;
         [SerializeField] private ExclamationPointAnimation _animation;
         [SerializeField] private BlockRoot _blockRoot;
+        [SerializeField] private DOTweenRoot _tweenRoot;
         private Camera _camera;
         private SnakeMovement _snake;
         private IDisposable _presenter;
@@ -26,9 +27,9 @@ namespace Snake.Root
 
         private void Awake()
         {
+            _tweenRoot.Init();
             _camera = Camera.main;
             var bounds = new SafeAreaBounds(_camera);
-            _prefab.SetColliderFromGameObject();
             _snake = new SnakeMovement(_input, _snakeRigidbody, _horizontalSpeed, bounds);
             _input.Init(_camera);
             _view.Init(_snakeHead, _prefab, _endGameWindow, _animation);

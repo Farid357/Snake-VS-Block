@@ -1,30 +1,29 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Snake.Model
 {
     public sealed class SnakeCircles : ICounter
     {
-        private bool _isImmortal;
-
+        public event Action OnCompletedBeImmortal;
+        public event Action OnBecameImmortal;
         public event Action OnRemoved;
         public event Action<int> OnAdded;
         public event Action<int> OnChanged;
 
+        public bool IsImmortal { get; private set; }
         public int Count { get; private set; }
 
         public void Add(int count)
         {
             if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
             Count += count;
-            Debug.Log(Count);
-            OnAdded?.Invoke(count);
+            OnAdded?.Invoke(count - 1);
             OnChanged?.Invoke(Count);
         }
 
         public void Remove(int count)
         {
-            if (_isImmortal == false)
+            if (IsImmortal == false)
             {
                 Count -= count;
                 if (Count <= 0)
@@ -32,13 +31,19 @@ namespace Snake.Model
                     Count = 0;
                     return;
                 }
-                Debug.Log(Count);
 
                 OnRemoved?.Invoke();
                 OnChanged?.Invoke(Count);
             }
         }
 
-        public void SetIsImmortal(bool isImmortal) => _isImmortal = isImmortal;
+        public void SetIsImmortal(bool isImmortal)
+        {
+            IsImmortal = isImmortal;
+            if (IsImmortal)
+                OnBecameImmortal?.Invoke();
+            else
+                OnCompletedBeImmortal?.Invoke();
+        }
     }
 }

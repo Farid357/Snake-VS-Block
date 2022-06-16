@@ -107,6 +107,10 @@ PrefabInstance:
       propertyPath: _colors.Array.data[4].r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2650920195186827187, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
+      propertyPath: _maxDelay
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3570641484551903443, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
       propertyPath: m_Name
       value: Block (2) Variant
@@ -122,6 +126,10 @@ PrefabInstance:
     - target: {fileID: 6447752723553593928, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
       propertyPath: <Diameter>k__BackingField
       value: -1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 6447752723553593928, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
+      propertyPath: <AbilitySeconds>k__BackingField
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6447752723553593928, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
       propertyPath: <ChanceCurve>k__BackingField.m_Curve.Array.size
@@ -194,6 +202,14 @@ PrefabInstance:
     - target: {fileID: 7913536514927818877, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140173387244959003, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4527
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140173387244959003, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.004701555
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 440e875a596fe8c4981b0b1b61bd495b, type: 3}

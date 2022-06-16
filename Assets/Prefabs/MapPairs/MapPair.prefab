@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: 370884332995361987}
   - {fileID: 8362949158298873715}
   - {fileID: 4767659044332226419}
-  _destroySeconds: 15
+  _disableSeconds: 15
   _foodContexts:
   - {fileID: 27015984178216428}
   - {fileID: 4996095147500924742}

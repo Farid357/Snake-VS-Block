@@ -2,7 +2,6 @@
 
 namespace Snake.Model
 {
-    [Serializable]
     public sealed class BonusBlock : BlockHealth
     {
         private readonly IAbility _ability;

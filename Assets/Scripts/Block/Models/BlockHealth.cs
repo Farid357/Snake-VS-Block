@@ -22,14 +22,20 @@ namespace Snake.Model
 
             if (_health <= 0)
             {
-                OnEnded?.Invoke();
-                PlayEndFeedback();
+                Kill();
             }
         }
 
         protected virtual void PlayEndFeedback()
         {
 
+        }
+
+        public void Kill()
+        {
+            _health = 0;
+            OnEnded?.Invoke();
+            PlayEndFeedback();
         }
     }
 }

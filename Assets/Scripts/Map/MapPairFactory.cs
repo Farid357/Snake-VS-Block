@@ -11,18 +11,22 @@ namespace Snake.GameLogic
         [SerializeField] private List<MapPair> _pairs = new();
         [SerializeField] private float _delay = 3.5f;
         [SerializeField] private Transform _spawnPoint;
+        [SerializeField] private AbilityViewProvider _abilityViewProvider;
+        [SerializeField] private float _yOffset = 4f;
         private readonly List<IDisposable> _disposables = new();
         private RandomMapPairGenerator _generator;
         private BlockProvider _provider;
         private ObjectsPool<MapPair> _pool;
         private SnakeCircles _snakeCircles;
+        private readonly FoodFactory _foodFactory = new();
+        private readonly BlockFactory _blockFactory = new();
 
         [Zenject.Inject]
         public void Constructor(ObjectsPool<MapPair> pool) => _pool = pool;
 
         public void Init(int startCount, Transform parent, SnakeCircles snakeCircles)
         {
-            _provider = new(snakeCircles);
+            _provider = new(snakeCircles, _pairs[0].BlockContexts[0].AbilitySeconds);
             _generator = new(_pairs, snakeCircles);
             _snakeCircles = snakeCircles ?? throw new System.ArgumentNullException(nameof(snakeCircles));
 
@@ -48,20 +52,19 @@ namespace Snake.GameLogic
 
                 foreach (var block in pair.BlockContexts)
                 {
-                    var model = _provider.GetBlock(block.Type, block.Health, block.AbilitySeconds);
-                    IDisposable presenter = new BlockPresenter(_snakeCircles, model, block.View, block.Collision);
-                    _disposables.Add(presenter);
-                    block.gameObject.SetActive(true);
+                    var disposables = _blockFactory.Spawn(_provider, block, _snakeCircles, _abilityViewProvider);
+                    _disposables.Add(disposables.Item1);
+                    if (disposables.Item2 != null)
+                    {
+                        _disposables.Add(disposables.Item2);
+                    }
                 }
 
                 foreach (var food in pair.FoodContexts)
                 {
-                    var model = new Food(food.Value);
-                    IDisposable presenter = new FoodPresener(model, food.View, _snakeCircles);
-                    _disposables.Add(presenter);
-                    food.gameObject.SetActive(true);
+                  _disposables.Add(_foodFactory.Spawn(food, _snakeCircles));
                 }
-
+                _spawnPoint.position = new Vector2(_spawnPoint.position.x, _spawnPoint.position.y + _yOffset);
                 yield return wait;
             }
         }

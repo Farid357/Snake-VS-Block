@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: 8362949158298873715}
   - {fileID: 6480044837586286683}
   - {fileID: 2971331569734262536}
-  _destroySeconds: 15
+  _disableSeconds: 15
   _foodContexts:
   - {fileID: 4560338892473133084}
   - {fileID: 8009469031383024132}
@@ -63,8 +63,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.27825344
-      value: 40.786278
+      time: 2.0226803
+      value: 102.01934
       inSlope: 0
       outSlope: 0
       tangentMode: 0
