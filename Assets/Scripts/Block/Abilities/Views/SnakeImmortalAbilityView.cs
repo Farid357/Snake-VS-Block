@@ -8,42 +8,31 @@ namespace Snake.Model
     {
         [SerializeField] private Image _timer;
         [SerializeField] private Image _scull;
-        [SerializeField] private float _scaleCofficient = 1.2f;
+        [SerializeField] private float _scaleCofficient = 0.4f;
         [SerializeField] private Sprite _openScull;
 
         private Sprite _closeScull;
         private Vector2 _startScale;
-        private bool _isEnded;
+
+        private void Awake()
+        {
+            _startScale = _timer.transform.localScale;
+            _closeScull = _scull.sprite;
+        }
 
         public void Display(float seconds)
         {
-            TryResetAll();
-            var tween = _timer.DOFillAmount(0, seconds);
-            tween.OnComplete(new TweenCallback(() => IcreaseScale(_scaleCofficient)));
+            ResetAll();
+            _timer.DOFillAmount(0, 5)
+                 .OnComplete(new TweenCallback(() => _scull.sprite = _openScull)).
+                 OnComplete(new TweenCallback(() => _scull.DOFade(0, 0.35f).SetDelay(0.2f)));
         }
 
-        private void TryResetAll()
+        private void ResetAll()
         {
-            _scull.sprite = _closeScull != null ? _closeScull : _scull.sprite;
+            _scull.sprite = _closeScull;
             _timer.fillAmount = 1;
             _scull.color = Color.white;
-            _scull.transform.localScale = _startScale != default ? _startScale : _scull.transform.localScale;
-            _timer.gameObject.SetActive(true);
-        }
-
-        private void IcreaseScale(float cofficient)
-        {
-
-            var tween = _scull.transform.DOScale(cofficient, 0.2f);
-            tween.OnComplete(new TweenCallback(() => MakeClear(_scull)));
-        }
-
-        private void MakeClear(Image scull)
-        {
-            _closeScull = scull.sprite;
-            scull.sprite = _openScull;
-            scull.DOColor(Color.clear, 0.2f);
-            _isEnded = true;
         }
     }
 }

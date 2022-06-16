@@ -265,7 +265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &116436096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   _view: {fileID: 1362757590}
   _snakeHead: {fileID: 1072457889}
   _prefab: {fileID: 7345989706875230491, guid: 62110d58ae3a56f41b3acf7d9de90547, type: 3}
-  _circlesStartCount: 100
+  _circlesStartCount: 10
   _endGameWindow: {fileID: 805578480}
   _animation: {fileID: 953845561}
   _blockRoot: {fileID: 763980462}
@@ -1206,7 +1206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &953845560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1311,6 +1311,7 @@ GameObject:
   - component: {fileID: 1072457889}
   - component: {fileID: 1072457888}
   - component: {fileID: 1072457886}
+  - component: {fileID: 1072457892}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -1435,6 +1436,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1072457892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072457885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5b29ffaa859f4a8947d09fd580cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1293454102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,6 +1562,7 @@ GameObject:
   - component: {fileID: 1362757587}
   - component: {fileID: 1362757586}
   - component: {fileID: 1362757590}
+  - component: {fileID: 1362757591}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1653,24 +1667,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c91712f49263d4885f3b3501451c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _text: {fileID: 86282421}
+  <ImmortalView>k__BackingField: {fileID: 1362757591}
+--- !u!114 &1362757591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362757584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfcf759f7db2840419df56cb75f54b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 0, g: 0.9342464, b: 0.99215686, a: 1}
-    key2: {r: 0.9815712, g: 0, b: 1, a: 0}
-    key3: {r: 0, g: 0.14723444, b: 1, a: 0}
-    key4: {r: 1, g: 0.64807504, b: 0, a: 0}
-    key5: {r: 0.1535995, g: 1, b: 0, a: 0}
-    key6: {r: 0.1535995, g: 1, b: 0, a: 0}
-    key7: {r: 0.1535995, g: 1, b: 0, a: 0}
-    ctime0: 6361
-    ctime1: 15420
-    ctime2: 25250
-    ctime3: 42405
-    ctime4: 53585
-    ctime5: 60524
-    ctime6: 60524
-    ctime7: 28527
+    key1: {r: 1, g: 0, b: 0, a: 1}
+    key2: {r: 0, g: 0.18992662, b: 1, a: 0}
+    key3: {r: 1, g: 0, b: 0.90971565, a: 0}
+    key4: {r: 1, g: 0.5552265, b: 0, a: 0}
+    key5: {r: 0, g: 1, b: 0.23516965, a: 0}
+    key6: {r: 0, g: 0.98078895, b: 1, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 8674
+    ctime2: 18504
+    ctime3: 30840
+    ctime4: 43176
+    ctime5: 53777
+    ctime6: 65535
+    ctime7: 0
     atime0: 0
     atime1: 65535
     atime2: 0
@@ -1680,9 +1708,8 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 1
-    m_NumColorKeys: 6
+    m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  _text: {fileID: 86282421}
 --- !u!1 &1565549652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,7 +1761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1875,7 +1902,7 @@ Animator:
   m_GameObject: {fileID: 2139538470}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 863e4a34828c692498c770b045f3b43a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0b6178974a97e474492b7609fd71410f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

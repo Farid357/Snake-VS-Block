@@ -1,4 +1,6 @@
-﻿namespace Snake.Model
+﻿using UnityEngine;
+
+namespace Snake.Model
 {
     public sealed class Food
     {
@@ -7,6 +9,7 @@
         public Food(int count)
         {
             Count = count;
+            Debug.Log(Count);
         }
     }
 }

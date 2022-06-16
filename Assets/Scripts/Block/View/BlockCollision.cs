@@ -34,7 +34,6 @@ namespace Snake.GameLogic
                 {
                     _delay = 0;
                     OnCollided.Invoke();
-                    Debug.Log("Collision");
                 }
             }
         }

@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,13 +9,12 @@ namespace Snake.GameLogic
         public readonly List<Circle> Circles = new();
         public readonly List<Vector3> Positions = new();
 
-        [SerializeField] private Gradient _gradient;
         [SerializeField] private TMP_Text _text;
         private EndGameWindowView _endGameWindow;
         private ExclamationPointAnimation _animation;
         private Circle _prefab;
-        private readonly List<Sequence> _sequences = new();
 
+        [field: SerializeField] public SnakeCirclesImmortalView ImmortalView { get; private set; }
         public float CircleDiameter { get; private set; }
         public SnakeHead Head { get; private set; }
 
@@ -26,7 +24,7 @@ namespace Snake.GameLogic
             _animation = animation ?? throw new System.ArgumentNullException(nameof(animation));
             Head = head ?? throw new System.ArgumentNullException(nameof(head));
             Positions.Add(head.transform.position);
-            CircleDiameter = prefab.GetRadius();
+            CircleDiameter = prefab.GetDiameter();
             _endGameWindow = endGameWindow ?? throw new System.ArgumentNullException(nameof(endGameWindow));
         }
 
@@ -38,6 +36,7 @@ namespace Snake.GameLogic
                 var circle = Instantiate(_prefab, lastCirclePosition, Quaternion.identity);
                 Circles.Add(circle);
                 Positions.Add(circle.transform.position);
+                ImmortalView.UpdateCirclesColor(Circles);
             }
         }
 
@@ -45,35 +44,22 @@ namespace Snake.GameLogic
         {
             _text.text = count.ToString();
             _animation.TryPlay(count);
+            ImmortalView.UpdateCirclesColor(Circles);
         }
 
         public void RemoveLast()
         {
             if (Circles.Count <= 0)
             {
+                Die();
                 Destroy(Head.gameObject);
                 return;
             }
 
             Destroy(Circles[0].gameObject);
-            //Head.gameObject.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0);
             Circles.RemoveAt(0);
             Positions.RemoveAt(0);
-        }
-
-        public void MakeImmortal()
-        {
-            for (int i = 0; i < Circles.Count; i++)
-            {
-                _sequences.Add(Circles[i].SpriteRenderer.DOGradientColor(_gradient, 5));
-            }
-        }
-
-        public void UnMakeImmortal()
-        {
-            Debug.Log("Unmake");
-            Circles.ForEach(x => x.SpriteRenderer.DOColor(Color.white, 0.2f));
-            _sequences.ForEach(s => s.Kill());
+            ImmortalView.UpdateCirclesColor(Circles);
         }
 
         public void Die() => _endGameWindow.Show();

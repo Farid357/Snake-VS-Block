@@ -9,12 +9,12 @@ namespace Snake.GameLogic
 
         public SpriteRenderer SpriteRenderer { get; private set; }
 
-        private void Awake()
+        public void Enable()
         {
             _collider = GetComponent<CircleCollider2D>();
             SpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        public float GetRadius() => _collider.radius;
+        public float GetDiameter() => _collider.radius;
     }
 }

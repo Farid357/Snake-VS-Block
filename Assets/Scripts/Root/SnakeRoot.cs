@@ -25,9 +25,10 @@ namespace Snake.Root
         private IUpdatable _presenterUpdate;
         private readonly SnakeCircles _model = new();
 
-        private void Awake()
+        private void Start()
         {
             _tweenRoot.Init();
+            _prefab.Enable();
             _camera = Camera.main;
             var bounds = new SafeAreaBounds(_camera);
             _snake = new SnakeMovement(_input, _snakeRigidbody, _horizontalSpeed, bounds);
