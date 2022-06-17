@@ -2,15 +2,19 @@
 
 namespace Snake.Model
 {
-    public sealed class BonusBlock : BlockHealth
+    public sealed class BonusBlock : Block
     {
-        private readonly IAbility _ability;
+        public readonly IAbility Ability;
 
-        public BonusBlock(IAbility ability, int health) : base(health) 
+        public BonusBlock(IAbility ability, int health, AbilityProvider provider) : base(health)
         {
-            _ability = ability ?? throw new ArgumentNullException(nameof(ability));
+            Ability = ability ?? throw new ArgumentNullException(nameof(ability));
+            provider.SetAbility(ability);
         }
 
-        protected override void PlayEndFeedback() => _ability.Apply();
+        protected override void PlayEndFeedback()
+        {
+            Ability.Apply();
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace Snake.GameLogic
     public enum BlockType
     {
         Standart,
-        WithImmortalAbiity
+        WithImmortalAbiity,
+        WithHealthAbility
     }
 }

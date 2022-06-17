@@ -1,4 +1,5 @@
 ﻿using System;
+using Snake.GameLogic;
 
 namespace Snake.Model
 {

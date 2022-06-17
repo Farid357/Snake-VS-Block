@@ -1,6 +1,5 @@
 ﻿using System;
 using Snake.Model;
-using UnityEngine;
 
 namespace Snake.GameLogic
 {
@@ -17,8 +16,6 @@ namespace Snake.GameLogic
             _model.OnRemoved += _view.RemoveLast;
             _model.OnAdded += _view.Add;
             _model.OnChanged += _view.Display;
-            _model.OnBecameImmortal += _view.ImmortalView.MakeImmortal;
-            _model.OnCompletedBeImmortal += _view.ImmortalView.UnMakeImmortal;
             _model.Add(count);
             _circlesMovement = new(_view.Circles, _view.Positions, _view.CircleDiameter, _view.Head);
         }
@@ -28,8 +25,6 @@ namespace Snake.GameLogic
             _model.OnAdded -= _view.Add;
             _model.OnRemoved -= _view.RemoveLast;
             _model.OnChanged -= _view.Display;
-            _model.OnBecameImmortal -= _view.ImmortalView.MakeImmortal;
-            _model.OnCompletedBeImmortal -= _view.ImmortalView.UnMakeImmortal;
         }
 
         public void Update(float deltaTime) => _circlesMovement.Update(deltaTime);

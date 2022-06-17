@@ -1,4 +1,4 @@
-﻿namespace Snake.Model
+﻿namespace Snake.GameLogic
 {
     public interface IAbilityView
     {

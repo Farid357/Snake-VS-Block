@@ -6,5 +6,8 @@ namespace Snake.Model
     {
         public event Action<float> OnApplyed;
         public void Apply();
+
+        public bool IsApplyed { get; }
+        public void TakeBlockHealth(IBlock block, in int damage);
     }
 }

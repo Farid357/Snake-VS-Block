@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 5710259855513399964}
   - component: {fileID: 6012081974844982814}
   m_Layer: 0
-  m_Name: BonusBlock
+  m_Name: ImmortalBonusBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   <View>k__BackingField: {fileID: 5710259855513399964}
   <Type>k__BackingField: 1
   <Health>k__BackingField: 10
-  <AbilitySeconds>k__BackingField: 5
+  <AbilitySeconds>k__BackingField: 8
 --- !u!1 &4704148645639171438
 GameObject:
   m_ObjectHideFlags: 0

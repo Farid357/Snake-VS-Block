@@ -5,12 +5,12 @@ namespace Snake.GameLogic
 {
     public sealed class SnakeCirclesMovement : IUpdatable
     {
-        private readonly List<Circle> _circles;
-        private readonly List<Vector3> _positions;
+        private readonly IList<Circle> _circles;
+        private readonly IList<Vector3> _positions;
         private readonly float _circleDiameter;
         private readonly SnakeHead _head;
 
-        public SnakeCirclesMovement(List<Circle> circles, List<Vector3> positions, float circleDiameter, SnakeHead head)
+        public SnakeCirclesMovement(IList<Circle> circles, IList<Vector3> positions, float circleDiameter, SnakeHead head)
         {
             _circles = circles ?? throw new System.ArgumentNullException(nameof(circles));
             _positions = positions ?? throw new System.ArgumentNullException(nameof(positions));

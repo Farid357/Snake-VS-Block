@@ -48,7 +48,6 @@ namespace Snake.GameLogic
                 var pair = _pool.Get(randomPair);
                 pair.gameObject.SetActive(true);
                 pair.transform.position = new Vector2(pair.transform.position.x, _spawnPoint.position.y);
-                pair.Enable();
 
                 foreach (var block in pair.BlockContexts)
                 {

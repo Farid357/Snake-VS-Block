@@ -7,10 +7,10 @@ namespace Snake.GameLogic
 
         public (IDisposable, IDisposable) Spawn(BlockProvider provider, BlockContext block, SnakeCircles snakeCircles, AbilityViewProvider abilityViewProvider)
         {
-            var model = provider.GetBlock(block.Type, block.Health, block.AbilitySeconds);
-            IDisposable presenter = new BlockPresenter(snakeCircles, model, block.View, block.Collision);
-            block.gameObject.SetActive(true);
+            var model = provider.GetBlock(block.Type, block.Health);
             var ability = provider.Ability;
+            IDisposable presenter = new BlockPresenter(snakeCircles, model, block.View, block.Collision, provider.AbilityProvider);
+            block.gameObject.SetActive(true);
             IDisposable abilityPresenter = null;
 
             if (ability != null)

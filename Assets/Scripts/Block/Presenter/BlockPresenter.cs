@@ -8,17 +8,19 @@ namespace Snake.GameLogic
         private readonly IBlock _model;
         private readonly SnakeCircles _snakeCircles;
         private readonly BlockCollision _collision;
-        private const int Damage = 1;
+        private readonly AbilityProvider _provider;
         private readonly BlockView _view;
+        private const int Damage = 1;
 
-        public BlockPresenter(SnakeCircles snakeCircles, IBlock model, BlockView view, BlockCollision collision)
+        public BlockPresenter(SnakeCircles snakeCircles, IBlock model, BlockView view, BlockCollision collision, AbilityProvider provider)
         {
+            _provider = provider ?? throw new ArgumentNullException(nameof(provider));
             _snakeCircles = snakeCircles ?? throw new ArgumentNullException(nameof(snakeCircles));
             _collision = collision ?? throw new ArgumentNullException(nameof(collision));
             _model = model ?? throw new ArgumentNullException(nameof(model));
             _view = view ?? throw new ArgumentNullException(nameof(view));
-            _model.OnChanged += _view.Display;
-            _model.OnEnded += _view.Disable;
+            _model.OnChangedHealth += _view.Display;
+            _model.OnEndedHealth += _view.Disable;
             _collision.OnCollided += RemoveSnakeCircle;
             _model.UpdateHealth();
             _view.DisplayRandomColor();
@@ -26,23 +28,21 @@ namespace Snake.GameLogic
 
         private void RemoveSnakeCircle()
         {
-            if (_snakeCircles.IsImmortal == false)
-                _snakeCircles.Remove(Damage);
-            if (_snakeCircles.IsImmortal)
+            if (_provider.HasAbility(out var ability) && ability.IsApplyed)
             {
-                _model.Kill();
+                ability.TakeBlockHealth(_model, Damage);
             }
-
             else
             {
                 _model.TakeDamage(Damage);
+                _snakeCircles.Remove(Damage);
             }
         }
 
         public void Dispose()
         {
-            _model.OnChanged -= _view.Display;
-            _model.OnEnded -= _view.Disable;
+            _model.OnChangedHealth -= _view.Display;
+            _model.OnEndedHealth -= _view.Disable;
             _collision.OnCollided -= RemoveSnakeCircle;
         }
     }

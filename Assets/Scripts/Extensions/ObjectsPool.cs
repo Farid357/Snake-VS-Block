@@ -20,10 +20,7 @@ namespace Snake.Tools
                 _count = count;
                 for (int i = 0; i < count; i++)
                 {
-                    if (_container == null) Debug.Log("null");
                     var createObject = parent != null ? _container.InstantiatePrefab(prefab) : _container.InstantiatePrefab(prefab, parent);
-
-                    //var createObject = Object.Instantiate(prefab, parent);
                     createObject.gameObject.SetActive(false);
                     _objects.Add(createObject.GetComponent<T>());
                 }

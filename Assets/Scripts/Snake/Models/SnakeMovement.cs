@@ -1,5 +1,6 @@
 using Snake.Input;
 using Snake.Tools;
+using System;
 using UnityEngine;
 
 namespace Snake.Model
@@ -10,14 +11,14 @@ namespace Snake.Model
         private readonly float _verticalSpeed = 1.2f;
         private readonly Rigidbody2D _rigidbody;
         private readonly IInput _input;
-        private readonly Tools.SafeAreaBounds _bounds;
+        private readonly SafeAreaBounds _bounds;
         private float _xDelta;
 
-        public SnakeMovement(IInput input, Rigidbody2D rigidbody, float horizontalSpeed, Tools.SafeAreaBounds bounds)
+        public SnakeMovement(IInput input, Rigidbody2D rigidbody, float horizontalSpeed, SafeAreaBounds bounds)
         {
-            _rigidbody = rigidbody ?? throw new System.ArgumentNullException(nameof(rigidbody));
+            _rigidbody = rigidbody ?? throw new ArgumentNullException(nameof(rigidbody));
             _horizontalSpeed = horizontalSpeed;
-            _input = input ?? throw new System.ArgumentNullException(nameof(input));
+            _input = input ?? throw new ArgumentNullException(nameof(input));
             _bounds = bounds;
             _input.OnChangedDelta += MoveX;
         }

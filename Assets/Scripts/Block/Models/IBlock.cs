@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace Snake.GameLogic
+namespace Snake.Model
 {
     public interface IBlock
     {
         public void TakeDamage(in int damage);
         public void UpdateHealth();
 
-        public event Action<int> OnChanged;
+        public event Action<int> OnChangedHealth;
 
-        public event Action OnEnded;
+        public event Action OnEndedHealth;
         public void Kill();
     }
 }

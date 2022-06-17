@@ -6,11 +6,12 @@ namespace Snake.GameLogic
     [RequireComponent(typeof(BoxCollider2D))]
     public sealed class BlockCollision : MonoBehaviour
     {
-        public event Action OnCollided;
-
         [SerializeField, Min(0.001f)] private float _maxDelay = 0.02f;
         private bool _isInCollision;
         private float _delay;
+        private Action _onCollided;
+
+        public event Action OnCollided { add => _onCollided ??= value; remove => _onCollided -= value; }
 
         private void OnCollisionEnter2D(Collision2D collision) => TrySetInCollision(collision, true);
 
@@ -33,7 +34,7 @@ namespace Snake.GameLogic
                 if (_delay >= _maxDelay)
                 {
                     _delay = 0;
-                    OnCollided.Invoke();
+                    _onCollided.Invoke();
                 }
             }
         }

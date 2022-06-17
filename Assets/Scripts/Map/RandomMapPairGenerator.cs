@@ -8,14 +8,13 @@ namespace Snake.GameLogic
     public sealed class RandomMapPairGenerator
     {
         private readonly IEnumerable<MapPair> _pairs;
-        private readonly IEnumerable<float> _chances;
+        private IEnumerable<float> _chances;
         private readonly ICounter _snakeCircles;
 
         public RandomMapPairGenerator(IEnumerable<MapPair> pairs, ICounter snakeCircles)
         {
             _snakeCircles = snakeCircles ?? throw new System.ArgumentNullException(nameof(snakeCircles));
             _pairs = pairs ?? throw new System.ArgumentNullException(nameof(pairs));
-            _chances = CreateChances();
         }
 
         private IEnumerable<float> CreateChances()
@@ -29,6 +28,7 @@ namespace Snake.GameLogic
 
         public MapPair CreateRandomMapPair()
         {
+            _chances = CreateChances();
             var sum = _chances.Sum();
             var dropChance = Random.Range(0, sum);
             var value = 0f;

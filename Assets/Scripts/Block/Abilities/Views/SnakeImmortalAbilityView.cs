@@ -2,33 +2,35 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Snake.Model
+namespace Snake.GameLogic
 {
     public sealed class SnakeImmortalAbilityView : MonoBehaviour, IAbilityView
     {
         [SerializeField] private Image _timer;
         [SerializeField] private Image _scull;
-        [SerializeField] private float _scaleCofficient = 0.4f;
         [SerializeField] private Sprite _openScull;
+        [SerializeField] private SnakeCirclesView _circlesView;
+        [SerializeField] private SnakeCirclesImmortalView _immortalView;
 
+        private Sequence _sequence;
         private Sprite _closeScull;
-        private Vector2 _startScale;
 
-        private void Awake()
-        {
-            _startScale = _timer.transform.localScale;
-            _closeScull = _scull.sprite;
-        }
+        private void Awake() => _closeScull = _scull.sprite;
 
         public void Display(float seconds)
         {
-            ResetAll();
-            _timer.DOFillAmount(0, 5)
-                 .OnComplete(new TweenCallback(() => _scull.sprite = _openScull)).
-                 OnComplete(new TweenCallback(() => _scull.DOFade(0, 0.35f).SetDelay(0.2f)));
+            _sequence = DOTween.Sequence();
+            _immortalView.SetIsImmortal(true);
+            _immortalView.StartUpdateCirclesColor(_circlesView.Circles);
+            ResetAllValues();
+            _sequence.Append(_timer.DOFillAmount(0, seconds));
+            _sequence.AppendCallback(new TweenCallback(() => _scull.sprite = _openScull));
+            _sequence.AppendInterval(0.2f);
+            _sequence.Append(_scull.DOFade(0, 0.35f).SetDelay(0.2f));
+            _sequence.AppendCallback(new TweenCallback(() => _immortalView.SetIsImmortal(false)));
         }
 
-        private void ResetAll()
+        private void ResetAllValues()
         {
             _scull.sprite = _closeScull;
             _timer.fillAmount = 1;

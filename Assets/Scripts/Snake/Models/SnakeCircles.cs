@@ -4,8 +4,6 @@ namespace Snake.Model
 {
     public sealed class SnakeCircles : ICounter
     {
-        public event Action OnCompletedBeImmortal;
-        public event Action OnBecameImmortal;
         public event Action OnRemoved;
         public event Action<int> OnAdded;
         public event Action<int> OnChanged;
@@ -37,13 +35,6 @@ namespace Snake.Model
             }
         }
 
-        public void SetIsImmortal(bool isImmortal)
-        {
-            IsImmortal = isImmortal;
-            if (IsImmortal)
-                OnBecameImmortal?.Invoke();
-            else
-                OnCompletedBeImmortal?.Invoke();
-        }
+        public void SetIsImmortal(bool isImmortal) => IsImmortal = isImmortal;
     }
 }
