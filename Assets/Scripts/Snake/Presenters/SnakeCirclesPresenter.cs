@@ -13,7 +13,7 @@ namespace Snake.GameLogic
         {
             _model = model ?? throw new ArgumentNullException(nameof(model));
             _view = view ?? throw new ArgumentNullException(nameof(view));
-            _model.OnRemoved += _view.RemoveLast;
+            _model.OnRemoved += _view.Remove;
             _model.OnAdded += _view.Add;
             _model.OnChanged += _view.Display;
             _model.Add(count);
@@ -23,7 +23,7 @@ namespace Snake.GameLogic
         public void Dispose()
         {
             _model.OnAdded -= _view.Add;
-            _model.OnRemoved -= _view.RemoveLast;
+            _model.OnRemoved -= _view.Remove;
             _model.OnChanged -= _view.Display;
         }
 

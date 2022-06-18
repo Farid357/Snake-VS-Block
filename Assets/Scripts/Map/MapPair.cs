@@ -21,7 +21,7 @@ namespace Snake.GameLogic
 
         private void TryDisable()
         {
-            if (isActiveAndEnabled)
+            if (gameObject.activeInHierarchy && _head != null)
             {
                 var currentDistance = _head.transform.position.y - transform.position.y;
                 if (currentDistance >= _distance)

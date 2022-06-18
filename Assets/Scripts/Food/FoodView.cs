@@ -20,7 +20,7 @@ namespace Snake.GameLogic
         {
             if (collision.TryGetComponent<SnakeHead>(out _))
             {
-                _onCollided.Invoke();
+                _onCollided?.Invoke();
                 gameObject.SetActive(false);
             }
         }

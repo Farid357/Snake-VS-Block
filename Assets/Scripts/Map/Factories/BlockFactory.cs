@@ -4,19 +4,13 @@ namespace Snake.GameLogic
 {
     public sealed class BlockFactory
     {
-
         public (IDisposable, IDisposable) Spawn(BlockProvider provider, BlockContext block, SnakeCircles snakeCircles, AbilityViewProvider abilityViewProvider)
         {
-            var model = provider.GetBlock(block.Type, block.Health);
-            var ability = provider.Ability;
-            IDisposable presenter = new BlockPresenter(snakeCircles, model, block.View, block.Collision, provider.AbilityProvider);
+            var data = provider.Get(block.Type, block.Health);
+            IDisposable presenter = new BlockPresenter(snakeCircles, data.Item1, block.View, block.Collision, provider.AbilityProvider);
             block.gameObject.SetActive(true);
-            IDisposable abilityPresenter = null;
-
-            if (ability != null)
-            {
-                abilityPresenter = new SnakeAbilityPresenter(ability, abilityViewProvider.Get(ability));
-            }
+            var ability = data.Item2;
+            IDisposable abilityPresenter = new SnakeAbilityPresenter(ability, abilityViewProvider.Get(ability));
             return (presenter, abilityPresenter);
         }
     }

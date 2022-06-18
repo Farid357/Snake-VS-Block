@@ -11,13 +11,14 @@ namespace Snake.Model
             _ability = ability ?? throw new ArgumentNullException(nameof(ability));
         }
 
-        public bool HasAbility(out IAbility ability)
+        public bool TryGetAbility(out IAbility ability)
         {
             if (_ability != null)
             {
                 ability = _ability;
                 return true;
             }
+
             ability = null;
             return false;
         }

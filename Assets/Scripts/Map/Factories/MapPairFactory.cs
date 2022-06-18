@@ -53,15 +53,12 @@ namespace Snake.GameLogic
                 {
                     var disposables = _blockFactory.Spawn(_provider, block, _snakeCircles, _abilityViewProvider);
                     _disposables.Add(disposables.Item1);
-                    if (disposables.Item2 != null)
-                    {
-                        _disposables.Add(disposables.Item2);
-                    }
+                    _disposables.Add(disposables.Item2);
                 }
 
                 foreach (var food in pair.FoodContexts)
                 {
-                  _disposables.Add(_foodFactory.Spawn(food, _snakeCircles));
+                    _disposables.Add(_foodFactory.Spawn(food, _snakeCircles));
                 }
                 _spawnPoint.position = new Vector2(_spawnPoint.position.x, _spawnPoint.position.y + _yOffset);
                 yield return wait;

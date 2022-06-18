@@ -10,6 +10,7 @@ namespace Snake.GameLogic
         private readonly BlockCollision _collision;
         private readonly AbilityProvider _provider;
         private readonly BlockView _view;
+        private readonly BlockDamagePolicy _damagePolicy;
         private const int Damage = 1;
 
         public BlockPresenter(SnakeCircles snakeCircles, IBlock model, BlockView view, BlockCollision collision, AbilityProvider provider)
@@ -24,14 +25,16 @@ namespace Snake.GameLogic
             _collision.OnCollided += RemoveSnakeCircle;
             _model.UpdateHealth();
             _view.DisplayRandomColor();
+            _damagePolicy = new(_snakeCircles);
         }
 
         private void RemoveSnakeCircle()
         {
-            if (_provider.HasAbility(out var ability) && ability.IsApplyed)
+            if (_provider.TryGetAbility(out var ability) && ability.IsApplyed)
             {
-                ability.TakeBlockHealth(_model, Damage);
+                _damagePolicy.TakeDamage(_model, ability, Damage);
             }
+
             else
             {
                 _model.TakeDamage(Damage);

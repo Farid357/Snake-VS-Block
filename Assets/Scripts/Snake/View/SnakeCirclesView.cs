@@ -42,22 +42,26 @@ namespace Snake.GameLogic
 
         public void Display(int count)
         {
-            _text.text = count.ToString();
+            _text.text = System.Convert.ToString(count + 1);
             _animation.TryPlay(count);
         }
 
-        public void RemoveLast()
+        public void Remove(int count)
         {
-            if (_circles.Count <= 0)
+            for (int i = 0; i < count; i++)
             {
-                Die();
-                Destroy(Head.gameObject);
-                return;
-            }
+                if (_circles.Count <= 2)
+                {
+                    Die();
+                    Destroy(_circles[0].gameObject);
+                    Destroy(Head.gameObject);
+                    return;
+                }
 
-            Destroy(_circles[0].gameObject);
-            _circles.RemoveAt(0);
-            _positions.RemoveAt(0);
+                Destroy(_circles[0].gameObject);
+                _circles.RemoveAt(0);
+                _positions.RemoveAt(0);
+            }
         }
 
         public void Die() => _endGameWindow.Show();

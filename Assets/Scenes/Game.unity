@@ -803,10 +803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pairs:
-  - {fileID: 8326496980631099300, guid: 7165764ed2217fe48b864b61190e9b19, type: 3}
-  - {fileID: 8326496980631099300, guid: 4f087c54743650a4a91495981a1ee59f, type: 3}
   - {fileID: 8326496980631099300, guid: cd865acefd9312647b3d20ef1447bbe0, type: 3}
-  - {fileID: 8326496980631099300, guid: 3da5d3c1ac2dd4444b8fafee451afbe2, type: 3}
   _delay: 3.6
   _spawnPoint: {fileID: 741679934}
   _abilityViewProvider: {fileID: 303580775}
@@ -1147,7 +1144,7 @@ MonoBehaviour:
   _view: {fileID: 1362757590}
   _snakeHead: {fileID: 1072457889}
   _prefab: {fileID: 7345989706875230491, guid: 62110d58ae3a56f41b3acf7d9de90547, type: 3}
-  _circlesStartCount: 10
+  _circlesStartCount: 9
   _endGameWindow: {fileID: 805578480}
   _animation: {fileID: 953845561}
   _blockRoot: {fileID: 763980462}
@@ -1506,7 +1503,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.92, b: 0.016, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

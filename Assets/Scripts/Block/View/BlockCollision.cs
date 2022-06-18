@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Snake.GameLogic
@@ -6,36 +7,33 @@ namespace Snake.GameLogic
     [RequireComponent(typeof(BoxCollider2D))]
     public sealed class BlockCollision : MonoBehaviour
     {
-        [SerializeField, Min(0.001f)] private float _maxDelay = 0.02f;
         private bool _isInCollision;
-        private float _delay;
+        private const float Delay = 0.1f;
         private Action _onCollided;
 
         public event Action OnCollided { add => _onCollided ??= value; remove => _onCollided -= value; }
 
-        private void OnCollisionEnter2D(Collision2D collision) => TrySetInCollision(collision, true);
+        private void OnCollisionEnter2D(Collision2D collision) => TrySetIsInCollision(collision, true);
 
-        private void OnCollisionExit2D(Collision2D collision) => TrySetInCollision(collision, false);
+        private void OnCollisionExit2D(Collision2D collision) => TrySetIsInCollision(collision, false);
 
-        private void TrySetInCollision(Collision2D collision, bool isInCollision)
+        private void TrySetIsInCollision(Collision2D collision, bool isInCollision)
         {
             if (collision.collider.TryGetComponent<SnakeHead>(out _))
             {
                 _isInCollision = isInCollision;
             }
+
+            StartCoroutine(OnCollidedTick(Delay));
         }
 
-        private void Update()
+        private IEnumerator OnCollidedTick(float delay)
         {
-            if (_isInCollision)
+            var wait = new WaitForSeconds(delay);
+            while (_isInCollision && gameObject.activeInHierarchy)
             {
-                _delay += Time.deltaTime;
-
-                if (_delay >= _maxDelay)
-                {
-                    _delay = 0;
-                    _onCollided.Invoke();
-                }
+                yield return wait;
+                _onCollided?.Invoke();
             }
         }
     }

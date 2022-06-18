@@ -19,6 +19,11 @@ namespace Snake.GameLogic
             {
                 return _healthView;
             }
+
+            if (ability is SnakeNullAbility)
+            {
+                return null;
+            }
             throw new System.InvalidOperationException();
         }
     }

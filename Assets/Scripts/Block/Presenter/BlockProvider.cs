@@ -8,6 +8,7 @@ namespace Snake.GameLogic
         public readonly AbilityProvider AbilityProvider = new();
         private readonly SnakeImmortalAbility _immortalAbility;
         private readonly SnakeHealthAbility _healthAbility;
+        private readonly SnakeNullAbility _nullAbility;
 
         public BlockProvider(SnakeCircles snakeCircles, float seconds)
         {
@@ -16,33 +17,33 @@ namespace Snake.GameLogic
                 throw new ArgumentNullException(nameof(snakeCircles));
             }
 
-            _immortalAbility = new(snakeCircles, seconds);
-            _healthAbility = new(snakeCircles, seconds);
+            _nullAbility = new(seconds);
+            _immortalAbility = new(seconds);
+            _healthAbility = new(seconds);
         }
 
-        public IAbility Ability { get; private set; }
 
-        public IBlock GetBlock(BlockType type, int health)
+        public (IBlock, IAbility) Get(BlockType type, int health)
         {
             if (type == BlockType.WithImmortalAbiity)
             {
-                Ability = _immortalAbility;
-                return new BonusBlock(Ability, health, AbilityProvider);
+                var bonusBlock = new BonusBlock(_immortalAbility, health, AbilityProvider);
+                return (bonusBlock, _immortalAbility);
             }
 
             if (type == BlockType.Standart)
             {
-                Ability = null;
-                return new Block(health);
+                var block = new Block(health);
+                return (block, _nullAbility);
             }
 
             if (type == BlockType.WithHealthAbility)
             {
-                Ability = _healthAbility;
-                return new BonusBlock(Ability, health, AbilityProvider);
+                var block = new BonusBlock(_healthAbility, health, AbilityProvider);
+                return (block, _healthAbility);
             }
 
-            throw new InvalidOperationException();
+            throw new InvalidOperationException($"{type} not added!");
         }
     }
 }

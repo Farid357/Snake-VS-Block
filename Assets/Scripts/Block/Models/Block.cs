@@ -4,14 +4,12 @@ namespace Snake.Model
 {
     public class Block : IBlock
     {
-        private int _health;
+        public int _health;
 
         public event Action<int> OnChangedHealth;
         public event Action OnEndedHealth;
 
         public Block(int health) => _health = health;
-
-        public bool IsDied => _health <= 0;
 
         public void UpdateHealth() => OnChangedHealth.Invoke(_health);
 

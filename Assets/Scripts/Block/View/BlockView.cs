@@ -11,7 +11,11 @@ namespace Snake.GameLogic
         [SerializeField] private ParticleSystem _particle;
         private SpriteRenderer _spriteRenderer;
 
-        public void Display(int count) => _text.text = count.ToString();
+        public void Display(int count)
+        {
+            _text.text = count.ToString();
+            Instantiate(_particle, transform.position, Quaternion.identity).Play();
+        }
 
         public void DisplayRandomColor()
         {

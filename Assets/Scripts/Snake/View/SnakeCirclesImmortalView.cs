@@ -32,7 +32,7 @@ namespace Snake.GameLogic
         public void EndEffect(IList<Circle> circles)
         {
             var circlesList = circles as List<Circle>;
-            circlesList.ForEach(c => c.SpriteRenderer.DOColor(Color.white, 0.2f));
+            circlesList.ForEach(c => c.SpriteRenderer.DOColor(Color.yellow, 0.2f));
         }
 
         public void SetIsImmortal(bool isImmortal) => _isImmortal = isImmortal;
