@@ -1,55 +1,25 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
-namespace Clicker.LoadSystem
+namespace Snake.LoadSystem
 {
     public sealed class ScreenFade : MonoBehaviour
     {
         public event Action OnDarkened;
         [SerializeField] private Image _screen;
-        private WaitForSeconds _delay = new(0.05f);
-        private bool _isDarkened;
+        [SerializeField] private float _fadeInSeconds = 1.5f;
+        [SerializeField] private float _fadeOutSeconds = 2f;
+
 
         private void Start() => DontDestroyOnLoad(gameObject);
 
-        public void StartFade() => StartCoroutine(Fade());
-
-        public void StartFadeOut() => StartCoroutine(FadeOut());
-
-        private IEnumerator Fade()
+        public void FadeIn()
         {
-            while (!_isDarkened)
-            {
-                for (float t = 0.05f; t <= 1; t += 0.05f)
-                {
-                    SetColor(t);
-                    yield return _delay;
-                }
-                _isDarkened = true;
-                OnDarkened?.Invoke();
-            }
+            _screen.DOFade(1, _fadeInSeconds).SetAutoKill(false).OnComplete(new TweenCallback(() => OnDarkened?.Invoke()));
         }
 
-        private IEnumerator FadeOut()
-        {
-            while (_isDarkened)
-            {
-                for (float t = 1; t >= 0; t -= 0.05f)
-                {
-                    SetColor(t);
-                    yield return _delay;
-                }
-                _isDarkened = false;
-            }
-        }
-
-        private void SetColor(float t)
-        {
-            Color color = _screen.color;
-            color.a = t;
-            _screen.color = color;
-        }
+        public void FadeOut() => _screen.DOFade(0, _fadeOutSeconds);
     }
 }

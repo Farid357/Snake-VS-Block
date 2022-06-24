@@ -11,7 +11,7 @@ namespace Snake.GameLogic
         private const float Delay = 0.1f;
         private Action _onCollided;
 
-        public event Action OnCollided { add => _onCollided ??= value; remove => _onCollided -= value; }
+        public event Action OnCollided { add => _onCollided = value; remove => _onCollided -= value; }
 
         private void OnCollisionEnter2D(Collision2D collision) => TrySetIsInCollision(collision, true);
 
@@ -23,7 +23,7 @@ namespace Snake.GameLogic
             {
                 _isInCollision = isInCollision;
             }
-
+            if (_isInCollision) 
             StartCoroutine(OnCollidedTick(Delay));
         }
 

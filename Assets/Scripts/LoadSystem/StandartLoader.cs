@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 
-namespace Clicker.LoadSystem
+namespace Snake.LoadSystem
 {
     public class StandartLoader : ILoader
     {

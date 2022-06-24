@@ -4,7 +4,7 @@ namespace Snake.Model
 {
     public class Block : IBlock
     {
-        public int _health;
+        private int _health;
 
         public event Action<int> OnChangedHealth;
         public event Action OnEndedHealth;

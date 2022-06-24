@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 
-namespace Clicker.LoadSystem
+namespace Snake.LoadSystem
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public sealed class LoadText : MonoBehaviour

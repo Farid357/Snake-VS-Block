@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Clicker.LoadSystem
+namespace Snake.LoadSystem
 {
     [CreateAssetMenu(fileName = "Scene", menuName = "Create/ Scene data")]
     public sealed class SceneData : ScriptableObject, ISerializationCallbackReceiver

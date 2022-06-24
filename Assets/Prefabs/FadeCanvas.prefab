@@ -115,6 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _screen: {fileID: 3041430112698111418}
+  _fadeInSeconds: 1.5
+  _fadeOutSeconds: 2
 --- !u!1 &3041430112698111416
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,8 +128,6 @@ GameObject:
   - component: {fileID: 3041430112698111417}
   - component: {fileID: 3041430112698111419}
   - component: {fileID: 3041430112698111418}
-  - component: {fileID: 3041430112698111396}
-  - component: {fileID: 3041430112698111397}
   m_Layer: 5
   m_Name: FadePanel
   m_TagString: Untagged
@@ -193,39 +193,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!111 &3041430112698111396
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3041430112698111416}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: a4abb504234412348abcc8ef09b643f2, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: a4abb504234412348abcc8ef09b643f2, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!95 &3041430112698111397
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3041430112698111416}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

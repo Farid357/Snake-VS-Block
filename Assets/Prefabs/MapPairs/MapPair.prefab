@@ -63,43 +63,43 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -38.292233
-      value: 66.83742
-      inSlope: 5.2775593
-      outSlope: 5.2775593
-      tangentMode: 0
+      time: 0
+      value: 0
+      inSlope: 11.324771
+      outSlope: 11.324771
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.059748262
+      value: 0.6766354
+      inSlope: 5.979224
+      outSlope: 5.979224
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: -2.9524908
-      value: 42.749557
-      inSlope: 2.320933
-      outSlope: 2.320933
-      tangentMode: 0
+      time: 0.59150034
+      value: 1.013595
+      inSlope: 0.30019885
+      outSlope: 0.30019885
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 16.573547
-      value: 81.50134
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      time: 1
+      value: 1
+      inSlope: -0.033280283
+      outSlope: -0.033280283
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
-    - serializedVersion: 3
-      time: 46.877693
-      value: 21.202984
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
+    m_PreInfinity: 0
+    m_PostInfinity: 0
     m_RotationOrder: 4
 --- !u!1001 &1731177717637230585
 PrefabInstance:

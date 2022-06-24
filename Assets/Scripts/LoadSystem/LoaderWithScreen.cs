@@ -2,7 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Threading.Tasks;
 
-namespace Clicker.LoadSystem
+namespace Snake.LoadSystem
 {
     public sealed class LoaderWithScreen : ILoader
     {

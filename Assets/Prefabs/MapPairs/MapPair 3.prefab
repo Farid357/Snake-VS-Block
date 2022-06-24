@@ -63,52 +63,34 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -4.1307397
-      value: 15.188534
-      inSlope: -1.9864124
-      outSlope: -1.9864124
-      tangentMode: 0
+      time: 0
+      value: 0
+      inSlope: 0.021433663
+      outSlope: 0.021433663
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 40.867653
+      value: 0.8759435
+      inSlope: -0.12997855
+      outSlope: -0.12997855
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 5.6721354
-      value: 7.6854706
-      inSlope: 0.19867346
-      outSlope: 0.19867346
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.44323528
-    - serializedVersion: 3
-      time: 20.096008
-      value: 7.1982775
-      inSlope: -0.044717375
-      outSlope: -0.044717375
-      tangentMode: 0
+      time: 44.46003
+      value: -0.13491821
+      inSlope: -0.28139076
+      outSlope: -0.28139076
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 25.706833
-      value: 14.211174
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 44.17472
-      value: 6
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
+    m_PreInfinity: 0
+    m_PostInfinity: 0
     m_RotationOrder: 4
 --- !u!1001 &270776866911047889
 PrefabInstance:
@@ -208,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7913536514927818877, guid: a299abe307c4b1d4e82a34f5b728a207, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: 7913536514927818877, guid: a299abe307c4b1d4e82a34f5b728a207, type: 3}
       propertyPath: m_LocalPosition.y
@@ -362,7 +344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7963986103964121791, guid: 4e4f9414a31327940b61223ca035b77d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.84
+      value: 1.91
       objectReference: {fileID: 0}
     - target: {fileID: 7963986103964121791, guid: 4e4f9414a31327940b61223ca035b77d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -512,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7963986103964121791, guid: 4e4f9414a31327940b61223ca035b77d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.63
+      value: -2.6
       objectReference: {fileID: 0}
     - target: {fileID: 7963986103964121791, guid: 4e4f9414a31327940b61223ca035b77d, type: 3}
       propertyPath: m_LocalPosition.y
