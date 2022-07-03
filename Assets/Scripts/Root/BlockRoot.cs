@@ -10,9 +10,9 @@ namespace Snake.Root
         [SerializeField] private MapPairFactory _factory;
         [SerializeField] private int _startSpawnCount = 4;
 
-        public void Init(SnakeCircles snakeCircles)
+        public void Init(SnakeCircles snakeCircles, Score score)
         {
-            _factory.Init(_startSpawnCount, transform, snakeCircles);
+            _factory.Init(_startSpawnCount, transform, snakeCircles, score);
         }
 
         private void OnDestroy() => _factory.Dispose();

@@ -13,19 +13,21 @@ namespace Snake.GameLogic
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private AbilityViewProvider _abilityViewProvider;
         [SerializeField] private float _yOffset = 4f;
+        [SerializeField] private ScoreView _scoreView;
         private readonly List<IDisposable> _disposables = new();
         private RandomMapPairGenerator _generator;
         private BlockProvider _provider;
         private ObjectsPool<MapPair> _pool;
         private SnakeCircles _snakeCircles;
         private readonly FoodFactory _foodFactory = new();
-        private readonly BlockFactory _blockFactory = new();
+        private BlockFactory _blockFactory;
 
         [Zenject.Inject]
         public void Constructor(ObjectsPool<MapPair> pool) => _pool = pool;
 
-        public void Init(int startCount, Transform parent, SnakeCircles snakeCircles)
+        public void Init(int startCount, Transform parent, SnakeCircles snakeCircles, Score score)
         {
+            _blockFactory = new(_scoreView, score);
             _provider = new(snakeCircles, _pairs[0].BlockContexts[0].AbilitySeconds);
             _generator = new(_pairs, snakeCircles);
             _snakeCircles = snakeCircles ?? throw new System.ArgumentNullException(nameof(snakeCircles));
@@ -52,6 +54,7 @@ namespace Snake.GameLogic
                 foreach (var block in pair.BlockContexts)
                 {
                     var disposables = _blockFactory.Spawn(_provider, block, _snakeCircles, _abilityViewProvider);
+                    _disposables.Add(_blockFactory);
                     _disposables.Add(disposables.Item1);
                     _disposables.Add(disposables.Item2);
                 }

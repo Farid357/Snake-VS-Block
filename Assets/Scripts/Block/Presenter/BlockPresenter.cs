@@ -1,16 +1,17 @@
 using Snake.Model;
 using System;
+using System.Collections.Generic;
 
 namespace Snake.GameLogic
 {
     public sealed class BlockPresenter : IDisposable
     {
         private readonly IBlock _model;
+        private readonly ISnakeAbilityVisitor _damagePolicy;
         private readonly SnakeCircles _snakeCircles;
         private readonly BlockCollision _collision;
         private readonly AbilityProvider _provider;
         private readonly BlockView _view;
-        private readonly BlockDamagePolicy _damagePolicy;
         private const int Damage = 1;
 
         public BlockPresenter(SnakeCircles snakeCircles, IBlock model, BlockView view, BlockCollision collision, AbilityProvider provider)
@@ -25,14 +26,14 @@ namespace Snake.GameLogic
             _collision.OnCollided += RemoveSnakeCircle;
             _model.UpdateHealth();
             _view.DisplayRandomColor();
-            _damagePolicy = new(_snakeCircles);
+            _damagePolicy = new BlockDamagePolicy(_snakeCircles, Damage);
         }
 
         private void RemoveSnakeCircle()
         {
             if (_provider.TryGetAbility(out var ability) && ability.IsApplyed)
             {
-                _damagePolicy.TakeDamage(_model, ability, Damage);
+                _damagePolicy.Visit((dynamic)ability, _model);
             }
 
             else

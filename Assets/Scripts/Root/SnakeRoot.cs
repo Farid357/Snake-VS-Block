@@ -3,6 +3,7 @@ using Snake.Input;
 using Snake.Model;
 using Snake.Tools;
 using UnityEngine;
+using Zenject;
 
 namespace Snake.Root
 {
@@ -19,10 +20,12 @@ namespace Snake.Root
         [SerializeField] private ExclamationPointAnimation _animation;
         [SerializeField] private BlockRoot _blockRoot;
         [SerializeField] private DOTweenRoot _tweenRoot;
+        [SerializeField] private EndGameWindowView _window;
         private Camera _camera;
         private SnakeMovement _snake;
         private IDisposable _presenter;
         private IUpdatable _presenterUpdate;
+        private IDisposable _counter;
         private readonly SnakeCircles _model = new();
 
         private void Start()
@@ -30,13 +33,16 @@ namespace Snake.Root
             _tweenRoot.Init();
             _prefab.Enable();
             _camera = Camera.main;
+            var score = new Score();
             var bounds = new SafeAreaBounds(_camera);
             _snake = new SnakeMovement(_input, _snakeRigidbody, _horizontalSpeed, bounds);
             _input.Init(_camera);
             _view.Init(_snakeHead, _prefab, _endGameWindow, _animation);
             _presenter = new SnakeCirclesPresenter(_view, _model, _circlesStartCount);
             _presenterUpdate = _presenter as IUpdatable;
-            _blockRoot.Init(_model);
+            _blockRoot.Init(_model, score);
+            _counter = new BestScore(score);
+            _window.Init(_counter as ICounter);
         }
 
         private void FixedUpdate() => _snake.FixedUpdate(Time.fixedDeltaTime);
@@ -45,6 +51,7 @@ namespace Snake.Root
         {
             _snake.Dispose();
             _presenter.Dispose();
+            _counter.Dispose();
         }
 
         private void Update() => _presenterUpdate.Update(Time.deltaTime);

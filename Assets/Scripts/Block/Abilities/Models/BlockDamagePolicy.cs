@@ -1,37 +1,26 @@
 ﻿namespace Snake.Model
 {
-    public sealed class BlockDamagePolicy
+    public sealed class BlockDamagePolicy : ISnakeAbilityVisitor
     {
         private readonly SnakeCircles _snakeCircles;
+        private readonly int _damage;
 
-        public BlockDamagePolicy(SnakeCircles snakeCircles) => _snakeCircles = snakeCircles;
-
-        public void TakeDamage(in IBlock block, in IAbility ability, in int damage)
+        public BlockDamagePolicy(SnakeCircles snakeCircles, int damage)
         {
-            if (ability is SnakeImmortalAbility)
-            {
-                TakeDamage(block);
-                return;
-            }
-
-            if (ability is SnakeHealthAbility)
-            {
-                TakeDamage(block, damage);
-                return;
-            }
-
-            throw new System.InvalidOperationException($"Type {ability.GetType()} not added!");
+            _snakeCircles = snakeCircles ?? throw new System.ArgumentNullException(nameof(snakeCircles));
+            _damage = damage;
         }
 
-        private void TakeDamage(in IBlock block)
+        public void Visit(SnakeImmortalAbility immortalAbility, IBlock block) => block.Kill();
+
+        public void Visit(SnakeHealthAbility healthAbility, IBlock block)
         {
-            block.Kill();
+            _snakeCircles.Add(_damage);
+            block.TakeDamage(_damage);
         }
 
-        private void TakeDamage(in IBlock block, in int damage)
+        public void Visit(SnakeNullAbility nullAbility, IBlock block)
         {
-            _snakeCircles.Add(damage);
-            block.TakeDamage(damage);
         }
     }
 }
