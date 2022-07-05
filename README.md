@@ -17,6 +17,7 @@
  - В проекте используется чистый архитектурный подход **MVP - Passive View**, чтобы выявить все его недостатки и преимущества. 
  - Также в проекте написан отдельный слой **Composite Root**.
  - Проект пытается максимально приблизится к настоящему **ООП**
+ - Проект пытается следовать принципам  SOLID & GRASP
  
 ### Виды блоков:
  - **Обычный блок** - наносит урон змейке, по унитожению спавнит эффект.
@@ -28,8 +29,8 @@
 - [**DoTween**] (http://dotween.demigiant.com)
 - [**Zenject**] (https://github.com/modesttree/Zenject)
 - [**MVP - Passive View**] (https://user-images.githubusercontent.com/104379303/177339644-aff5614a-a282-4701-a284-6495019ef7cd.png)
-
-
+- [**SOLID**] (https://professorweb.ru/my/it/blog/net/solid.php)
+- [**GRASP**] (https://www.kamilgrzybek.com/design/grasp-explained)
 
 ## Разработчики
 
