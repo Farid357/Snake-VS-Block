@@ -7,13 +7,13 @@ namespace Snake.GameLogic
         private readonly ScorePresenter _scorePresenter;
         private readonly ScoreView _scoreView;
 
-        public void Dispose() => _scorePresenter.Dispose();
-
         public BlockFactory(ScoreView scoreView, Score score)
         {
             _scoreView = scoreView ?? throw new System.ArgumentNullException(nameof(scoreView));
             _scorePresenter = new(_scoreView, score);
         }
+
+        public void Dispose() => _scorePresenter.Dispose();
 
         public (IDisposable, IDisposable) Spawn(BlockProvider provider, BlockContext block, SnakeCircles snakeCircles, AbilityViewProvider abilityViewProvider)
         {
