@@ -11,15 +11,13 @@ namespace Snake.Model
         public SnakeAbilityPresenter(IAbility model, IAbilityView view)
         {
             _model = model ?? throw new ArgumentNullException(nameof(model));
-            _view = view;
-            if (_view != null)
-                _model.OnApplyed += _view.Display;
+            _view = view ?? throw new ArgumentNullException(nameof(view));
+            _model.OnApplyed += _view.Display;
         }
 
         public void Dispose()
         {
-            if (_view != null)
-                _model.OnApplyed -= _view.Display;
+            _model.OnApplyed -= _view.Display;
         }
     }
 }

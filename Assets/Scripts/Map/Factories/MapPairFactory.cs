@@ -28,7 +28,7 @@ namespace Snake.GameLogic
         public void Init(int startCount, Transform parent, SnakeCircles snakeCircles, Score score)
         {
             _blockFactory = new(_scoreView, score);
-            _provider = new(snakeCircles, _pairs[0].BlockContexts[0].AbilitySeconds);
+            _provider = new(_pairs[0].BlockContexts[0].AbilitySeconds);
             _generator = new(_pairs, snakeCircles);
             _snakeCircles = snakeCircles ?? throw new System.ArgumentNullException(nameof(snakeCircles));
 

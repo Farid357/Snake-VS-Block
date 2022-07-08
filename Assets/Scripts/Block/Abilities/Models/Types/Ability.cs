@@ -5,9 +5,7 @@ namespace Snake.Model
 {
     public class Ability : IAbility
     {
-        public event Action<float> OnApplyed;
         private readonly float _seconds;
-
 
         public Ability(float seconds)
         {
@@ -15,6 +13,8 @@ namespace Snake.Model
         }
 
         public bool IsApplyed { get; private set; }
+
+        public event Action<float> OnApplyed;
 
         public async void Apply()
         {

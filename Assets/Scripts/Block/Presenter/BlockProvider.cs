@@ -6,44 +6,43 @@ namespace Snake.GameLogic
     public sealed class BlockProvider
     {
         public readonly AbilityProvider AbilityProvider = new();
+
         private readonly SnakeImmortalAbility _immortalAbility;
         private readonly SnakeHealthAbility _healthAbility;
         private readonly SnakeNullAbility _nullAbility;
+        private readonly RandomAbilityGenerator _generator = new();
 
-        public BlockProvider(SnakeCircles snakeCircles, float seconds)
+        public BlockProvider(float seconds)
         {
-            if (snakeCircles is null)
-            {
-                throw new ArgumentNullException(nameof(snakeCircles));
-            }
-
             _nullAbility = new(seconds);
             _immortalAbility = new(seconds);
             _healthAbility = new(seconds);
         }
 
-
         public (IBlock, IAbility) Get(BlockType type, int health)
         {
-            if (type == BlockType.WithImmortalAbiity)
+            switch (type)
             {
-                var bonusBlock = new BonusBlock(_immortalAbility, health, AbilityProvider);
-                return (bonusBlock, _immortalAbility);
-            }
+                case BlockType.Standart:
+                    var block = new Block(health);
+                    return (block, _nullAbility);
 
-            if (type == BlockType.Standart)
-            {
-                var block = new Block(health);
-                return (block, _nullAbility);
-            }
+                case BlockType.WithImmortalAbiity:
+                    var bonusBlock = new BonusBlock(_immortalAbility, health, AbilityProvider);
+                    return (bonusBlock, _immortalAbility);
 
-            if (type == BlockType.WithHealthAbility)
-            {
-                var block = new BonusBlock(_healthAbility, health, AbilityProvider);
-                return (block, _healthAbility);
-            }
+                case BlockType.WithHealthAbility:
+                    var healthBlock = new BonusBlock(_healthAbility, health, AbilityProvider);
+                    return (healthBlock, _healthAbility);
 
-            throw new InvalidOperationException($"{type} not added!");
+                case BlockType.WithRandomAbility:
+                    var ability = _generator.GetRandom(_healthAbility, _immortalAbility, _nullAbility);
+                    var randomBlock = new BonusBlock(ability, health, AbilityProvider);
+                    return (randomBlock, ability);
+
+                default:
+                    throw new InvalidOperationException($"{type} not added!");
+            }
         }
     }
 }

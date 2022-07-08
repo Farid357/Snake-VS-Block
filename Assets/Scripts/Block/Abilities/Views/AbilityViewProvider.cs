@@ -22,8 +22,9 @@ namespace Snake.GameLogic
 
             if (ability is SnakeNullAbility)
             {
-                return null;
+                return new SnakeNullAbilityView();
             }
+
             throw new System.InvalidOperationException();
         }
     }

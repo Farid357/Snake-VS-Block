@@ -17,6 +17,7 @@ namespace Snake.GameLogic
     {
         Standart,
         WithImmortalAbiity,
-        WithHealthAbility
+        WithHealthAbility,
+        WithRandomAbility
     }
 }
